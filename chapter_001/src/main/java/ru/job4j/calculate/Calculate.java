@@ -7,6 +7,10 @@ package ru.job4j.calculate;
     */
 
 public class Calculate{
+
+    
+
+
     /**
     * Main.
     * @param arg.
@@ -16,4 +20,20 @@ public class Calculate{
         System.out.println("HelloWorld");
 }
 
+    /**
+    * Method echo.
+    * @param name My name.
+    * @return Echo plus my name.
+    */
+
+    public String echo(String name){
+
+        return "Echo, echo, echo : " + name;
+
+
+    }
+
+
+
+    
 }
