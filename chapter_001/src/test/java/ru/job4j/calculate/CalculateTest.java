@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
     * @since 0.1
     */
 
-    public class CalculateTest{
+    public class CalculateTest {
     /**
     * Test echo.
     */
