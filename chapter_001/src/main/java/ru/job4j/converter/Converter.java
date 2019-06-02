@@ -32,5 +32,25 @@ public class Converter {
 
     }
 
+    /**
+     *  euros to rubles
+     * @param value euro
+     * @return ruble
+     */
+
+    public int euroToRuble(int value) {
+        return value * 70;
+    }
+
+    /**
+     *  dollars to rubles
+     * @param value dollar
+     * @return ruble
+     */
+
+    public int dollarToRuble(int value) {
+        return value * 60;
+    }
+
 
 }
