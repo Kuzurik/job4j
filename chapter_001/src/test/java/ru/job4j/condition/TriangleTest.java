@@ -5,7 +5,7 @@ import static org.hamcrest.number.IsCloseTo.closeTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * Triangle area test
+ * Calculates the area of ​​the triangle.
  *
  * @author Aliaksandr Kuzura (vorota-24@bk.ru)
  * @version $Id$
@@ -15,18 +15,18 @@ import static org.junit.Assert.assertThat;
 public class TriangleTest {
 
     /**
-     * Test triangle area
+     * Test calculates the area of ​​the triangle.
      */
 
     @Test
     public void whenAreaSetThreePointsThenTriangleArea() {
-        // Создаем объект треугольник.
+        // Create a triangle object.
         Triangle triangle = new Triangle();
-        // Вычисляем площадь.
+        // Calculate the area.
         double result = triangle.area(0, 0, 0, 2, 2, 0);
-        // Задаем ожидаемый результат.
+        // Set the expected result.
         double expected = 2D;
-        //Проверяем результат и ожидаемое значение.
+        //Check the result and the expected value.
         assertThat(result, closeTo(expected, 0.1));
     }
 }
