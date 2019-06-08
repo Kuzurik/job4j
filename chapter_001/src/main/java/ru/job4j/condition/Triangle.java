@@ -36,7 +36,7 @@ public class Triangle {
 
     private  boolean exist(double a, double b, double c) {
         // check the possibility of building a triangle
-        return a + b >= c  && a + c >= b  && b + c >= a;
+        return a + b > c  && a + c > b  && b + c > a;
     }
 
     /**
