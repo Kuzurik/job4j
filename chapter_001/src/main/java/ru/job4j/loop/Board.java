@@ -17,7 +17,7 @@ public class Board {
      * @return a string with the construction.
      */
 
-    public String paint(int width, int height){
+    public String paint(int width, int height) {
         StringBuilder screen = new StringBuilder();
         String ln = System.lineSeparator();
         for (int i = 1; i <= height; i++) {
