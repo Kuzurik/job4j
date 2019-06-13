@@ -28,7 +28,6 @@ public class Board {
                     screen.append(" ");
                 }
             }
-
             screen.append(ln);
         }
         return screen.toString();

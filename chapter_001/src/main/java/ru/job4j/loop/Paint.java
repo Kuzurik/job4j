@@ -1,5 +1,7 @@
 package ru.job4j.loop;
 
+import java.util.function.BiPredicate;
+
 /**
  * Build a pyramid in pseudographics
  * @author Aliaksandr Kuzura (vorota-24@bk.ru)
@@ -16,19 +18,11 @@ public class Paint {
      */
 
     public String leftTrl(int height) {
-        StringBuilder screen = new StringBuilder();
-        int width = height;
-        for (int row = 0; row != height; row++) {
-            for (int column = 0; column != width; column++) {
-                if (row >= width - column - 1) {
-                    screen.append("^");
-                } else {
-                    screen.append(" ");
-                }
-            }
-            screen.append(System.lineSeparator());
-        }
-        return screen.toString();
+        return this.loopBy(
+                height,
+                height,
+                (row, column) -> row >= height - column - 1
+        );
     }
 
     /**
@@ -37,21 +31,14 @@ public class Paint {
      * @return single line triangle
      */
 
-    public String rightTrl(int height) {
-        StringBuilder screen = new StringBuilder();
-        int width = height;
-        for (int row = 0; row != height; row++) {
-             for (int column = 0; column != width; column++) {
-                 if (row >= column) {
-                    screen.append("^");
-                } else {
-                    screen.append(" ");
-                }
-            }
-            screen.append(System.lineSeparator());
+
+        public String rightTrl(int height) {
+            return this.loopBy(
+                    height,
+                    height,
+                    (row, column) -> row >= column
+            );
         }
-        return screen.toString();
-    }
 
     /**
      *  Create pyramid
@@ -61,11 +48,19 @@ public class Paint {
 
 
     public String pyramid(int height) {
+        return this.loopBy(
+                height,
+                2 * height - 1,
+                (row, column) -> row >= height - column - 1 && row + height - 1 >= column
+        );
+    }
+
+
+    private String loopBy(int height, int widht, BiPredicate<Integer, Integer> predict) {
         StringBuilder screen = new StringBuilder();
-        int width = 2 * height - 1;
         for (int row = 0; row != height; row++) {
-            for (int column = 0; column != width; column++) {
-                if (row >= height - column - 1 && row + height - 1 >= column) {
+            for (int column = 0; column != widht; column++) {
+                if (predict.test(row, column)) {
                     screen.append("^");
                 } else {
                     screen.append(" ");
@@ -75,5 +70,7 @@ public class Paint {
         }
         return screen.toString();
     }
+
+
 
 }
