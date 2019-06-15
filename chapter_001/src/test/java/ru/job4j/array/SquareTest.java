@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 public class SquareTest {
 
     /**
-     * Test array comparison.
+     * First test array comparison.
      */
 
     @Test
@@ -25,4 +25,31 @@ public class SquareTest {
         int[] expect = new int[] {1, 4, 9};
         assertThat(rst, is(expect));
     }
+
+    /**
+     * Second test array comparison.
+     */
+
+    @Test
+    public void whenBound6Then149162536() {
+        int bound = 6;
+        Square square = new Square();
+        int[] rst = square.calculate(bound);
+        int[] expect = new  int[] {1, 4, 9, 16, 25, 36};
+        assertThat(rst, is(expect));
+    }
+
+    /**
+     * Third test array comparison.
+     */
+
+    @Test
+    public  void whenBound4Then14916() {
+        int bound = 4;
+        Square square = new Square();
+        int[] rst = square.calculate(bound);
+        int[] expect = new  int[] {1, 4, 9, 16};
+        assertThat(rst, is(expect));
+    }
+
 }
