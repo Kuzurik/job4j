@@ -17,7 +17,7 @@ public class MatrixCheck {
     public boolean mono(boolean[][] data) {
     boolean result = true;
         for (int out = 0; out != data.length - 1; out++) {
-            if (data[out][out] != data[out + 1][out + 1] || data[data.length -1 - out][out] != data[data.length - 2 - out][out + 1]) {
+            if (data[out][out] != data[out + 1][out + 1] || data[data.length - 1 - out][out] != data[data.length - 2 - out][out + 1]) {
                 result = false;
             }
         }
