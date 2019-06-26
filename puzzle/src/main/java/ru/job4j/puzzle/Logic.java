@@ -75,10 +75,10 @@ public class Logic {
             for (int col = 0; col != table.length; col++) {
                 colCount += table[row][col];
                 rowCount += table[col][row];
-                if (colCount == table.length || rowCount == table.length) {
-                    result = true;
-                    break;
-                }
+            }
+            if (colCount == table.length || rowCount == table.length) {
+                result = true;
+                break;
             }
             if (result) {
                 break;
