@@ -18,7 +18,6 @@ public class DummyBot {
 
     public String answer(String question) {
         String rsl;
-
         if ("Hello, Bot.".equals(question)) {
             rsl = "Hello, Wiseacre.";
         } else if ("Goodbye.".equals(question)) {
@@ -26,11 +25,6 @@ public class DummyBot {
         } else {
             rsl = "It baffles me. Ask another question.";
         }
-
-
         return rsl;
     }
-
-
-
 }

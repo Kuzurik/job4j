@@ -29,8 +29,6 @@ public class MultiMax {
         } else {
             result = third;
         }
-
-
         return result;
 
     }

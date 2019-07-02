@@ -23,7 +23,6 @@ public class Matrix {
                 table[out][inner] = tmp;
             }
         }
-
         return table;
     }
 

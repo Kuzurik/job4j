@@ -29,7 +29,6 @@ public class Converter {
 
     public int rubleToDollar(int value) {
         return value / 60;
-
     }
 
     /**
@@ -51,6 +50,4 @@ public class Converter {
     public int dollarToRuble(int value) {
         return value * 60;
     }
-
-
 }

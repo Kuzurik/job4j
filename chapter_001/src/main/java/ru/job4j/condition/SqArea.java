@@ -23,5 +23,4 @@ public class SqArea {
        int h = (p / (2 * k + 2));
         return w * h;
     }
-
 }
