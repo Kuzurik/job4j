@@ -28,4 +28,14 @@ public class MergeArrayTest {
         assertThat(result, is(expected));
     }
 
+    @Test
+    public  void when2ArrayTurn1DifferentLength() {
+        MergeArray mergeArray = new MergeArray();
+        int[] left = new int[] {1, 9};
+        int[] right = new int[] {2, 3, 4, 5};
+        int[] result = mergeArray.merge(left, right);
+        int[] expected = new int[] {1, 2, 3, 4, 5, 9};
+        assertThat(result, is(expected));
+    }
+
 }
