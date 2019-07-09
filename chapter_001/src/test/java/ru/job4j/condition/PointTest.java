@@ -43,4 +43,18 @@ public class PointTest {
         Point second = new Point(2, 2);
         second.info();
     }
+
+    /**
+     * Test distance3d calculation.
+     */
+    @Test
+    public void whenFiveAndFiveAndTenAndTenAndTwoAndTenToSeven() {
+        Point first = new Point(5, 10, 2);
+        Point second = new Point(5, 10, 10);
+        double result = first.distance3d(second);
+        first.info();
+        second.info();
+        System.out.println(String.format("Result is %s", result));
+        assertThat(result, is(8D));
+    }
 }

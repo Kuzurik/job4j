@@ -12,6 +12,7 @@ public class Point {
 
     private int x;
     private int y;
+    private int z;
 
 
     public Point(int first, int second) {
@@ -19,15 +20,37 @@ public class Point {
         this.y = second;
     }
 
+    public Point(int first, int second, int third) {
+        this.x = first;
+        this.y = second;
+        this.z = third;
+    }
 
-
+    /**
+     *
+     * @param that second object.
+     * @return distance.
+     */
 
     public double distance(Point that) {
         return Math.sqrt(Math.pow(this.x - that.x, 2) + Math.pow(this.y - that.y, 2));
     }
 
+    /**
+     * @param that second object.
+     * @return distance.
+     */
+
+    public double distance3d(Point that) {
+        return Math.sqrt(Math.pow(this.x - that.x, 2) + Math.pow(this.y - that.y, 2) + Math.pow(this.z - that.z, 2));
+    }
+
+    /**
+     * Console outputю
+     */
+
     public void info() {
-        System.out.println(String.format("Point[%s, %s]", this.x, this.y));
+        System.out.println(String.format("Point[%s, %s, %s]", this.x, this.y, this.z));
     }
 
 }
