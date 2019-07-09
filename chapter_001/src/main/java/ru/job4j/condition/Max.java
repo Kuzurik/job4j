@@ -12,12 +12,36 @@ public class Max {
 
     /**
      *  Calculation max number
-     * @param left firs number
-     * @param right second number
-     * @return greater number
+     * @param first firs number
+     * @param second second number
+     * @return greater number.
      */
 
-    public int max(int left, int right) {
-       return left > right ? left : right;
+    public int max(int first, int second) {
+       return first > second ? first : second;
     }
+
+    /**
+     *
+     * @param first number.
+     * @param second number.
+     * @param third number.
+     * @return greater number.
+     */
+    public int max(int first, int second, int third) {
+        return max(first, max(second, third));
+    }
+
+    /**
+     *
+     * @param first number.
+     * @param second number.
+     * @param third number.
+     * @param fourth number.
+     * @return greater number.
+     */
+    public int max(int first, int second, int third, int fourth) {
+        return max(first, max(second, max(third, fourth)));
+    }
+
   }
