@@ -10,16 +10,24 @@ package ru.job4j.condition;
 
 public class Point {
 
-    /**
-     * Distance calculation
-     * @param x1 coordinate
-     * @param x2 coordinate
-     * @param y1 coordinate
-     * @param y2 coordinate
-     * @return Distance
-     */
+    private int x;
+    private int y;
 
-    public double distance(int x1, int x2, int y1, int y2) {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+
+    public Point(int first, int second) {
+        this.x = first;
+        this.y = second;
     }
+
+
+
+
+    public double distance(Point that) {
+        return Math.sqrt(Math.pow(this.x - that.x, 2) + Math.pow(this.y - that.y, 2));
+    }
+
+    public void info() {
+        System.out.println(String.format("Point[%s, %s]", this.x, this.y));
+    }
+
 }
