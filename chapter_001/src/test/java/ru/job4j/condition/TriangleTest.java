@@ -20,13 +20,13 @@ public class TriangleTest {
 
     @Test
     public void whenAreaSetThreePointsThenTriangleArea() {
-        // Create a triangle object.
-        Triangle triangle = new Triangle();
-        // Calculate the area.
-        double result = triangle.area(0, 0, 0, 2, 2, 0);
-        // Set the expected result.
+        Point a = new Point(0, 0);
+        Point b = new Point(0, 2);
+        Point c = new Point(2, 0);
+
+        Triangle triangle = new Triangle(a, b, c);
+        double result = triangle.area(a, b, c);
         double expected = 2D;
-        //Check the result and the expected value.
         assertThat(result, closeTo(expected, 0.1));
     }
 }

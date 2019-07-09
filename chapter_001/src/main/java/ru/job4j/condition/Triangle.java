@@ -10,6 +10,17 @@ package ru.job4j.condition;
  */
 
 public class Triangle {
+    private Point first;
+    private Point second;
+    private Point third;
+
+    public Triangle(Point a, Point b, Point c) {
+        this.first = a;
+        this.second = b;
+        this.third = c;
+    }
+
+
     /**
      *  Method of calculating the half-perimeter by side length
      * @param a distance between points a b.
@@ -18,7 +29,7 @@ public class Triangle {
      * @return half-perimeter.
      */
 
-    public double period(double a, double b, double c) {
+   public double period(double a, double b, double c) {
          return (a + b + c) / 2;
     }
     /**
@@ -32,21 +43,13 @@ public class Triangle {
     private  boolean exist(double a, double b, double c) {
           return a + b > c  && a + c > b  && b + c > a;
     }
-    /**
-     *  The method calculates the area of ​​the triangle
-     * @param x1 coordinate
-     * @param y1 coordinate
-     * @param x2 coordinate
-     * @param y2 coordinate
-     * @param x3 coordinate
-     * @param y3 coordinate
-     * @return triangle's area
-     */
-    public double area(int x1, int y1, int x2, int y2, int x3, int y3) {
+
+
+     public double area(Point first, Point second, Point third) {
         double rsl;
-        double a = new Point().distance(x1, y1, x2, y2);
-        double b = new Point().distance(x2, y2, x3, y3);
-        double c = new Point().distance(x1, y1, x3, y3);
+        double a = first.distance(second);
+        double b = first.distance(third);
+        double c = second.distance(third);
         double p = period(a, b, c);
              if (this.exist(a, b, c)) {
                 rsl = Math.sqrt(p * (p - a) * (p - b) * (p - c));
