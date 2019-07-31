@@ -17,10 +17,10 @@ public class MergeArraySecond {
      */
 
     public int[] merge(int[] left, int[] right) {
-        int result[] = new int[left.length + right.length];
+        int[] result = new int[left.length + right.length];
         int length = 0;
-        for(int i = 0; i != left.length; i++) {
-            if(left[i] < right[i]) {
+        for (int i = 0; i != left.length; i++) {
+            if (left[i] < right[i]) {
                 result[length] = left[i];
                 result[length + 1] = right[i];
                 length += 2;
