@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 import java.util.Random;
 import java.util.Arrays;
 
+import static java.util.Arrays.copyOf;
+
 /**
  * The class generates an id, adds items, removes items,
  * replace items, find all items, find the id and find the name.
@@ -46,11 +48,9 @@ public class Tracker {
 
     public boolean replace(String id, Item item) {
         boolean result = false;
-            for (Item elements : items) {
-                if (elements != null && elements.getId().equals(id)) {
-                    elements.setName(item.getName());
-                    elements.setDecs(item.getDecs());
-                    elements.setTime(item.getTime());
+            for (int i = 0; i != position; i++) {
+                if (items[i] != null && items[i].getId().equals(id)) {
+                    items[i] = item;                    
                     result = true;
                     break;
                 }
@@ -83,11 +83,7 @@ public class Tracker {
      */
 
     public Item[] findAll() {
-        Item[] result = new Item[position];
-            for (int i = 0; i != result.length; i++) {
-                result[i] = this.items[i];
-            }
-        return result;
+       return Arrays.copyOf(this.items, this.position);
     }
 
     /**
@@ -104,7 +100,7 @@ public class Tracker {
                     result[count++] = items[i];
              }
          }
-        return Arrays.copyOf(result, count);
+        return copyOf(result, count);
     }
 
     /**
