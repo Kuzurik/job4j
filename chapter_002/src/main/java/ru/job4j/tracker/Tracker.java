@@ -50,7 +50,8 @@ public class Tracker {
         boolean result = false;
             for (int i = 0; i != position; i++) {
                 if (items[i] != null && items[i].getId().equals(id)) {
-                    items[i] = item;                    
+                    items[i].setName(item.getName());
+                    items[i].setDecs(item.getDecs());
                     result = true;
                     break;
                 }
@@ -100,7 +101,7 @@ public class Tracker {
                     result[count++] = items[i];
              }
          }
-        return copyOf(result, count);
+        return Arrays.copyOf(result, count);
     }
 
     /**
@@ -111,9 +112,9 @@ public class Tracker {
 
     public Item findById(String id) {
        Item result = null;
-        for (Item item : items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
+        for (int i = 0; i != items.length; i++) {
+            if (items[i] != null && items[i].getId().equals(id)) {
+                result = items[i];
                 break;
             }
         }
