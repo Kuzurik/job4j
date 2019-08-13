@@ -39,10 +39,10 @@ public class PaintTest {
         assertThat(
                 new String(out.toByteArray()),
                 is(new StringBuilder()
-                            .append("++++")
-                            .append("+  +")
-                            .append("+  +")
-                            .append("++++")
+                            .append("++++\n")
+                            .append("+  +\n")
+                            .append("+  +\n")
+                            .append("++++\n")
                             .append(System.lineSeparator())
                             .toString()
                 )
@@ -59,10 +59,10 @@ public class PaintTest {
         assertThat(
                 new String(out.toByteArray()),
                 is(new StringBuilder()
-                            .append("+")
-                            .append("+")
-                            .append("+")
-                            .append("++++")
+                            .append("+\n")
+                            .append("+\n")
+                            .append("+\n")
+                            .append("++++\n")
                             .append(System.lineSeparator())
                             .toString()
             )

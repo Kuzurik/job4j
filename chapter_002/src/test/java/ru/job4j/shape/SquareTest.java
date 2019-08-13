@@ -20,10 +20,10 @@ public class SquareTest {
         assertThat(square.draw(),
                    is(
                         new StringBuilder()
-                                    .append("++++")
-                                    .append("+  +")
-                                    .append("+  +")
-                                    .append("++++")
+                                    .append("++++\n")
+                                    .append("+  +\n")
+                                    .append("+  +\n")
+                                    .append("++++\n")
                                     .toString()
             )
         );    
