@@ -18,7 +18,7 @@ public class TrackerTest {
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
         long created = System.currentTimeMillis();
-        Item item = new Item("test1","testDescription",created);
+        Item item = new Item("test1", "testDescription", created);
         tracker.add(item);
         Item result = tracker.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
@@ -31,9 +31,9 @@ public class TrackerTest {
     @Test
     public void whenReplaceNameThenReturnNewName() {
         Tracker tracker = new Tracker();
-        Item previous = new Item("test1","testDescription",123L);
+        Item previous = new Item("test1", "testDescription", 123L);
         tracker.add(previous);
-        Item next = new Item("test2","testDescription2",1234L);
+        Item next = new Item("test2", "testDescription2", 1234L);
         next.setId(previous.getId());
         tracker.replace(previous.getId(), next);
         assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
@@ -44,7 +44,7 @@ public class TrackerTest {
      */
     
     @Test
-    public void WhenDeleteThanTrue() {
+    public void whenDeleteThanTrue() {
         Tracker tracker = new Tracker();
         Item item = new Item("name", "description", 12L);
         tracker.add(item);
@@ -60,7 +60,7 @@ public class TrackerTest {
      */
 
     @Test
-    public void WhenFindAllThanAllArray() {
+    public void whenFindAllThanAllArray() {
         Tracker tracker = new Tracker();
         Item item = new Item("name", "description", 12L);
         tracker.add(item);
@@ -69,7 +69,7 @@ public class TrackerTest {
         Item item2 = new Item("name2", "description2", 35L);
         tracker.add(item2);
         Item[] result = tracker.findAll();
-        Item[] expected = new Item[] {item, item1, item2,};
+        Item[] expected = new Item[] {item, item1, item2};
         assertThat(result, is(expected));
     }
 
@@ -78,7 +78,7 @@ public class TrackerTest {
      */
 
     @Test
-    public void WhenFindByNameThanNewArray() {
+    public void whenFindByNameThanNewArray() {
         Tracker tracker = new Tracker();
         Item item = new Item("name", "description", 12L);
         tracker.add(item);
@@ -96,7 +96,7 @@ public class TrackerTest {
      */
 
     @Test
-    public void WhenFindByIdReturnId() {
+    public void whenFindByIdReturnId() {
         Tracker tracker = new Tracker();
         Item item = new Item("name", "description", 12L);
         tracker.add(item);

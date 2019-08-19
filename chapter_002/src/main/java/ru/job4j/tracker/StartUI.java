@@ -59,7 +59,7 @@ public class StartUI {
     public void showAll() {
         Item[] item = tracker.findAll();
         for (int i = 0; i != item.length; i++) {
-            System.out.println("---  " + item[i].getId() + "  ---  " + item[i].getName() + "  ---  " + item[i].getDecs());
+            System.out.println("---" + item[i].getId() + "---" + item[i].getName() + "---" + item[i].getDecs());
         }
     }
 
@@ -112,7 +112,7 @@ public class StartUI {
         if (value.equals(null)) {
             System.out.println("Ничего не найдено !");
         } else {
-            System.out.println(value.getId() + "---" + value.getName() + "---" + value.getDecs());
+            System.out.println("---" + value.getId() + "---" + value.getName() + "---" + value.getDecs());
         }
     }
 
@@ -128,7 +128,7 @@ public class StartUI {
             System.out.println("Ничего не найдено !");
         } else {
             for (int i = 0; i != value.length; i++) {
-                System.out.println(value[i].getId() + "---" + value[i].getName() + "---" + value[i].getDecs());
+                System.out.println("---" + value[i].getId() + "---" + value[i].getName() + "---" + value[i].getDecs());
             }
         }
     }
