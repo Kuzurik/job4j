@@ -137,7 +137,7 @@ public class StartUITest {
 
     public String showMenu() {
     	StringBuilder menu = new StringBuilder();
-    	menu.append("0. Add new item" + System.lineSeparator());
+    	menu.append("0. Add the new item" + System.lineSeparator());
     	menu.append("1. Show all items" + System.lineSeparator());
     	menu.append("2. Edit item" + System.lineSeparator());
     	menu.append("3. Delete item" + System.lineSeparator());
