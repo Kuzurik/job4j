@@ -14,19 +14,22 @@ import static org.junit.Assert.assertThat;
  */
 
 public class StartUITest {
-	private final Tracker tracker = new Tracker();
+	private  Tracker tracker = new Tracker();
 	private final PrintStream stdout = System.out;
 	private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
 	
 	@Before
 	public void loadOutput() {
-	System.setOut(new PrintStream(this.out));
+		tracker = new Tracker();
+		System.setOut(new PrintStream(this.out));
+		System.out.println("Начало теста");
 	}
 	
 	@After
 	public void backOutput() {
-			System.setOut(this.stdout);
+		System.setOut(this.stdout);
+		System.out.println("Конец теста");
 	}
 
 	/**
@@ -35,13 +38,13 @@ public class StartUITest {
 
 	@Test
 	public void whenFindAllThenShowAll() {
-		Item item = this.tracker.add(new Item("test name", "desc", 123L));
-		Item item1 = this.tracker.add(new Item("test name1", "desc", 124L));
+		Item item = tracker.add(new Item("test name", "desc", 123L));
+		Item item1 = tracker.add(new Item("test name1", "desc", 124L));
 		Input input = new StubInput(new String[] {"1", "6"});
-		StartUI startUI = new StartUI(input, this.tracker);
+		StartUI startUI = new StartUI(input, tracker);
 		startUI.init();
 		assertThat(
-				new String(out.toByteArray()),
+				this.out.toString(),
 				is(
 						new StringBuilder()
 									.append(showMenu())
@@ -59,14 +62,14 @@ public class StartUITest {
 
 	@Test
 	public void whenFindByIdThenItemById() {
-		Item item =this.tracker.add(new Item("test name", "desc", 123L));
+		Item item = tracker.add(new Item("test name", "desc", 123L));
 		Input input = new StubInput(new String[] {"4", item.getId(), "6"});
-		StartUI startUI = new StartUI(input, this.tracker);
+		StartUI startUI = new StartUI(input, tracker);
 		startUI.init();
 		assertThat(
-				new String(out.toByteArray()),
+				new String(this.out.toByteArray()),
 				is(
-					new StringBuilder()
+						new StringBuilder()
 								.append(showMenu())
 								.append("---------------Ищем по id-------------" + System.lineSeparator())
 								.append("---" + item.getId() + "---" + item.getName() + "---" + item.getDecs() + System.lineSeparator())
@@ -74,6 +77,7 @@ public class StartUITest {
 								.toString()
 			)
 		);
+
 	}
 
 	/**
@@ -82,12 +86,12 @@ public class StartUITest {
 
 	@Test
 	public  void whenFindByNameThanItemByName() {
-		Item item =this.tracker.add(new Item("test name", "desc", 123L));
+		Item item = tracker.add(new Item("test name", "desc", 123L));
 		Input input = new StubInput((new String[] {"5", item.getName(), "6"}));
-		StartUI startUI = new StartUI(input, this.tracker);
+		StartUI startUI = new StartUI(input, tracker);
 		startUI.init();
 		assertThat(
-				new String(out.toByteArray()),
+				new String(this.out.toByteArray()),
 				is(
 						new StringBuilder()
 									.append(showMenu())
@@ -107,8 +111,8 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Input input = new StubInput(new String[] {"0", "test name", "desc", "6"});
-        new StartUI(input, this.tracker).init();
-        assertThat(this.tracker.findAll()[0].getName(), is("test name"));
+        new StartUI(input, tracker).init();
+        assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
 
     /**

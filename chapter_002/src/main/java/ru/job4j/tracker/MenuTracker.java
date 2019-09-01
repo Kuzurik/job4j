@@ -12,7 +12,7 @@ public class MenuTracker {
     private Input input;
     private Tracker tracker;
     private UserAction[] actions = new UserAction[7];
-    private static int exit = 0;
+    private static int exit;
     
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -48,20 +48,12 @@ public class MenuTracker {
 
     public void show() {
         for (UserAction action : this.actions) {
-            if (action != null){
+            if (action != null) {
                 System.out.println(action.info());
             }
         }
     }
 
-    /**
-     *
-     * @param exit parameter for output variable
-     */
-
-    public void setExit(int exit) {
-        this.exit = exit;
-    }
 
     /**
      * returns an exit variable
@@ -69,7 +61,7 @@ public class MenuTracker {
      */
 
     public int getExit() {
-        return exit;
+        return this.exit;
     }
 
 
@@ -78,13 +70,13 @@ public class MenuTracker {
             return 0;
         }
 
-        public void execute (Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Добавление новой заявки --------------");
             String name = input.ask("Введите имя заявки : ");
             String desc = input.ask("Введите комментарий : ");
             Item item = new Item(name, desc, System.currentTimeMillis());
             tracker.add(item);
-            System.out.println("---" + item.getId() + "---" + item.getName() + "---" + item.getDecs());
+            System.out.printf("---%s---%s---%s\n", item.getId(), item.getName(), item.getDecs());
         }
     
         public String info() {
@@ -100,7 +92,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             Item[] item = tracker.findAll();
             for (int i = 0; i != item.length; i++) {
-                System.out.println("---" + item[i].getId() + "---" + item[i].getName() + "---" + item[i].getDecs());
+                System.out.printf("---%s---%s---%s\n", item[i].getId(), item[i].getName(), item[i].getDecs());
             }
         }
 
@@ -114,7 +106,7 @@ public class MenuTracker {
             return 2;
         }
 
-        public void execute (Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             System.out.println("-----------------Редактируем заявку-----------------");
             String id = input.ask("Введите id заявки : ");
             String name = input.ask("Введите новое имя : ");
@@ -166,7 +158,8 @@ public class MenuTracker {
             if (value.equals(null)) {
                 System.out.println("Ничего не найдено !");
             } else {
-                System.out.println("---" + value.getId() + "---" + value.getName() + "---" + value.getDecs());
+                //System.out.println("---" + value.getId() + "---" + value.getName() + "---" +value.getDecs());
+                System.out.printf("---%s---%s---%s\n", value.getId(), value.getName(), value.getDecs());
             }
         }
 
@@ -188,7 +181,8 @@ public class MenuTracker {
                 System.out.println("Ничего не найдено !");
             } else {
                 for (int i = 0; i != value.length; i++) {
-                    System.out.println("---" + value[i].getId() + "---" + value[i].getName() + "---" + value[i].getDecs());
+                    System.out.printf("---%s---%s---%s\n", value[i].getId(), value[i].getName(), value[i].getDecs());
+                    //System.out.println("---" + value[i].getId() + "---" + value[i].getName() + "---" +value[i].getDecs());
                 }
             }
         }
@@ -203,8 +197,8 @@ public class MenuTracker {
             return 6;
         }
 
-        public void execute (Input input,Tracker tracker) {
-            new MenuTracker(input, tracker).setExit(6);
+        public void execute(Input input, Tracker tracker) {
+            MenuTracker.exit = 6;
         }
 
         public String info() {

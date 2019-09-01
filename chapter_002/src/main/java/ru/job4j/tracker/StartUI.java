@@ -27,7 +27,7 @@ public class StartUI {
             menu.show();
             int key = Integer.valueOf(input.ask("select: "));
             menu.select(key);
-        }while (!(6 == menu.getExit()));
+           } while (!(6 == menu.getExit()));
 
     }
 
