@@ -12,6 +12,7 @@ import java.util.Date;
 public class StartUI {
     private final Input input;
     private final Tracker tracker;
+    private  boolean exit = true;
 
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
@@ -22,13 +23,17 @@ public class StartUI {
 
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        menu.fillActions();
+        menu.fillActions(this);
         do {
             menu.show();
             int key = Integer.valueOf(input.ask("select: "));
             menu.select(key);
-           } while (!(6 == menu.getExit()));
+           } while (this.exit);
 
+    }
+
+    public void stopUI() {
+        this.exit = false;
     }
 
     public static void main(String[] args) {

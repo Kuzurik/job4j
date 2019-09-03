@@ -9,27 +9,24 @@ import java.util.StringJoiner;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+
 /**
  *  Tests methods add, replace, delete.
  */
 
 public class StartUITest {
-	private  Tracker tracker = new Tracker();
 	private final PrintStream stdout = System.out;
 	private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-	
+
 	@Before
 	public void loadOutput() {
-		tracker = new Tracker();
 		System.setOut(new PrintStream(this.out));
-		System.out.println("Начало теста");
 	}
-	
+
 	@After
 	public void backOutput() {
 		System.setOut(this.stdout);
-		System.out.println("Конец теста");
 	}
 
 	/**
@@ -38,6 +35,7 @@ public class StartUITest {
 
 	@Test
 	public void whenFindAllThenShowAll() {
+		Tracker tracker = new Tracker();
 		Item item = tracker.add(new Item("test name", "desc", 123L));
 		Item item1 = tracker.add(new Item("test name1", "desc", 124L));
 		Input input = new StubInput(new String[] {"1", "6"});
@@ -45,15 +43,14 @@ public class StartUITest {
 		startUI.init();
 		assertThat(
 				this.out.toString(),
-				is(
-						new StringBuilder()
+				is(	new StringBuilder()
 									.append(showMenu())
 									.append("---" + item.getId() + "---" + item.getName() + "---" + item.getDecs() + System.lineSeparator())
 									.append("---" + item1.getId() + "---" + item1.getName() + "---" + item1.getDecs() + System.lineSeparator())
 									.append(showMenu())
 									.toString()
 			)
-		);	
+		);
 	}
 
 	/**
@@ -62,12 +59,12 @@ public class StartUITest {
 
 	@Test
 	public void whenFindByIdThenItemById() {
+		Tracker tracker = new Tracker();
 		Item item = tracker.add(new Item("test name", "desc", 123L));
 		Input input = new StubInput(new String[] {"4", item.getId(), "6"});
-		StartUI startUI = new StartUI(input, tracker);
-		startUI.init();
+		new StartUI(input, tracker).init();
 		assertThat(
-				new String(this.out.toByteArray()),
+				this.out.toString(),
 				is(
 						new StringBuilder()
 								.append(showMenu())
@@ -77,7 +74,6 @@ public class StartUITest {
 								.toString()
 			)
 		);
-
 	}
 
 	/**
@@ -86,12 +82,12 @@ public class StartUITest {
 
 	@Test
 	public  void whenFindByNameThanItemByName() {
+		Tracker tracker = new Tracker();
 		Item item = tracker.add(new Item("test name", "desc", 123L));
 		Input input = new StubInput((new String[] {"5", item.getName(), "6"}));
-		StartUI startUI = new StartUI(input, tracker);
-		startUI.init();
+		new StartUI(input, tracker).init();
 		assertThat(
-				new String(this.out.toByteArray()),
+				this.out.toString(),
 				is(
 						new StringBuilder()
 									.append(showMenu())
@@ -110,6 +106,7 @@ public class StartUITest {
 
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
+		Tracker tracker = new Tracker();
         Input input = new StubInput(new String[] {"0", "test name", "desc", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name"));
@@ -121,10 +118,11 @@ public class StartUITest {
     
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
+		Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
         Input input = new StubInput(new String[] {"2", item.getId(), "test replace", "replace the application", "6"});
-        new StartUI(input, this.tracker).init();
-        assertThat(this.tracker.findById(item.getId()).getName(), is("test replace"));
+        new StartUI(input, tracker).init();
+        assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
     
     /**
@@ -133,13 +131,17 @@ public class StartUITest {
 
     @Test
     public void whenDeleteAloneItemThenTrackerIsEmpty() {
+		Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
         Input input = new StubInput(new String[] {"3", item.getId(), "6"});
-        new StartUI(input, this.tracker).init();
-		assertThat(this.tracker.findAll().length, is(0));
+        new StartUI(input, tracker).init();
+		assertThat(tracker.findAll().length, is(0));
     }
 
+
+
     public String showMenu() {
+
     	StringBuilder menu = new StringBuilder();
     	menu.append("0. Add the new item" + System.lineSeparator());
     	menu.append("1. Show all items" + System.lineSeparator());

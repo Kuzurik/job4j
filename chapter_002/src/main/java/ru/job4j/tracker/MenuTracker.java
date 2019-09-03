@@ -12,8 +12,7 @@ public class MenuTracker {
     private Input input;
     private Tracker tracker;
     private UserAction[] actions = new UserAction[7];
-    private static int exit;
-    
+
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
@@ -23,14 +22,14 @@ public class MenuTracker {
      * store menu
      */
 
-    public void fillActions() {
+    public void fillActions(StartUI ui) {
         this.actions[0] = new AddItem();
         this.actions[1] = new ShowAll();
         this.actions[2] = new EditItem();
         this.actions[3] = new DeleteItem();
         this.actions[4] = new FindItemById();
         this.actions[5] = new FindItemByName();
-        this.actions[6] = new Exit();
+        this.actions[6] = new Exit(ui);
     }
 
     /**
@@ -60,9 +59,6 @@ public class MenuTracker {
      * @return
      */
 
-    public int getExit() {
-        return this.exit;
-    }
 
 
     private class AddItem implements UserAction {
@@ -158,7 +154,6 @@ public class MenuTracker {
             if (value.equals(null)) {
                 System.out.println("Ничего не найдено !");
             } else {
-                //System.out.println("---" + value.getId() + "---" + value.getName() + "---" +value.getDecs());
                 System.out.printf("---%s---%s---%s\n", value.getId(), value.getName(), value.getDecs());
             }
         }
@@ -182,7 +177,6 @@ public class MenuTracker {
             } else {
                 for (int i = 0; i != value.length; i++) {
                     System.out.printf("---%s---%s---%s\n", value[i].getId(), value[i].getName(), value[i].getDecs());
-                    //System.out.println("---" + value[i].getId() + "---" + value[i].getName() + "---" +value[i].getDecs());
                 }
             }
         }
@@ -193,12 +187,18 @@ public class MenuTracker {
     }
 
     private class Exit implements UserAction {
+        private final StartUI ui;
+
+        Exit(StartUI ui) {
+            this.ui = ui;
+        }
+
         public int key() {
             return 6;
         }
 
         public void execute(Input input, Tracker tracker) {
-            MenuTracker.exit = 6;
+            this.ui.stopUI();
         }
 
         public String info() {
