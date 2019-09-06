@@ -41,9 +41,8 @@ public class StartUITest {
 		Input input = new StubInput(new String[] {"1", "6"});
 		StartUI startUI = new StartUI(input, tracker);
 		startUI.init();
-		assertThat(
-				this.out.toString(),
-				is(	new StringBuilder()
+		assertThat(this.out.toString(),
+			        is(new StringBuilder()
 									.append(showMenu())
 									.append("---" + item.getId() + "---" + item.getName() + "---" + item.getDecs() + System.lineSeparator())
 									.append("---" + item1.getId() + "---" + item1.getName() + "---" + item1.getDecs() + System.lineSeparator())

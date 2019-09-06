@@ -53,13 +53,9 @@ public class MenuTracker {
         }
     }
 
-
-    /**
-     * returns an exit variable
-     * @return
-     */
-
-
+    public int getActionsLentgh() {
+        return this.actions.length;
+    }
 
     private class AddItem implements UserAction {
         public int key() {
