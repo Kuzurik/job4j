@@ -53,7 +53,7 @@ public class MenuTracker {
         }
     }
 
-    public int getActionsLentgh() {
+    public int getActionsLength() {
         return this.actions.length;
     }
 

@@ -13,9 +13,22 @@ public class StubInput implements Input {
         return answers[position++];
     }
 
+    @Override
     public int ask(String question, List<Integer> range) {
-        //throw new UnsupportedOperationException("Unsupported operation");
-        return -1;
+       int key = Integer.valueOf(ask(question));
+       boolean exist = false;
+       for (int value : range) {
+           if (value == key) {
+               exist = true;
+               break;
+           }
+       }
+
+       if (exist) {
+           return key;
+       } else {
+            throw new MenuOutException("Please select key from menu.");
+       }
     }
 
 }

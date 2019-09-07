@@ -27,7 +27,7 @@ public class StartUI {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         List<Integer> range = new ArrayList<>();
         menu.fillActions(this);
-        for (int i = 0; i != menu.getActionsLentgh(); i++) {
+        for (int i = 0; i != menu.getActionsLength(); i++) {
             range.add(i);
         }
         do {
@@ -42,6 +42,6 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
     } 
 }
