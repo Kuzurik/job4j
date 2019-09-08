@@ -6,12 +6,12 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class ValidateUnputTest {
+public class ValidateInputTest {
     private final ByteArrayOutputStream mem = new ByteArrayOutputStream();
     private final PrintStream out = System.out;
 
@@ -29,10 +29,22 @@ public class ValidateUnputTest {
     public void whenInvalidInput() {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[] {"invalid", "1"}));
-        input.ask("Enter", new ArrayList<>(1));
+        input.ask("Enter", Arrays.asList(1));
         assertThat(this.mem.toString(),
                 is(
                         String.format("Please enter validate data again.%n")
+                )
+        );
+    }
+
+    @Test
+    public void whenMinusOneInput() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"-1", "1"}));
+        input.ask("Enter", Arrays.asList(1));
+        assertThat(this.mem.toString(),
+                is(
+                        String.format("Please select key from menu.%n")
                 )
         );
     }
