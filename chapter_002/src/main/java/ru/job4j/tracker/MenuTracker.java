@@ -68,7 +68,7 @@ public class MenuTracker {
             String desc = input.ask("Введите комментарий : ");
             Item item = new Item(name, desc, System.currentTimeMillis());
             tracker.add(item);
-            System.out.printf("---%s---%s---%s\n", item.getId(), item.getName(), item.getDecs());
+            System.out.printf("---%s---%s---%s" + System.lineSeparator(), item.getId(), item.getName(), item.getDecs());
         }
     
         public String info() {
@@ -84,7 +84,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             Item[] item = tracker.findAll();
             for (int i = 0; i != item.length; i++) {
-                System.out.printf("---%s---%s---%s\n", item[i].getId(), item[i].getName(), item[i].getDecs());
+                System.out.printf("---%s---%s---%s" + System.lineSeparator(), item[i].getId(), item[i].getName(), item[i].getDecs());
             }
         }
 
@@ -150,7 +150,7 @@ public class MenuTracker {
             if (value.equals(null)) {
                 System.out.println("Ничего не найдено !");
             } else {
-                System.out.printf("---%s---%s---%s\n", value.getId(), value.getName(), value.getDecs());
+                System.out.printf("---%s---%s---%s" + System.lineSeparator(), value.getId(), value.getName(), value.getDecs());
             }
         }
 
@@ -172,7 +172,7 @@ public class MenuTracker {
                 System.out.println("Ничего не найдено !");
             } else {
                 for (int i = 0; i != value.length; i++) {
-                    System.out.printf("---%s---%s---%s\n", value[i].getId(), value[i].getName(), value[i].getDecs());
+                    System.out.printf("---%s---%s---%s" + System.lineSeparator(), value[i].getId(), value[i].getName(), value[i].getDecs());
                 }
             }
         }
