@@ -14,7 +14,7 @@ import java.util.List;
 public class StartUI {
     private final Input input;
     private final Tracker tracker;
-    private  boolean exit = true;
+    private boolean exit = true;
 
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
@@ -33,13 +33,15 @@ public class StartUI {
         do {
             menu.show();
             menu.select(input.ask("select: ", range));
-           } while (this.exit);
+           } while (exit);
 
     }
 
-    public void stopUI() {
-        this.exit = false;
+    public void setExit(boolean exit) {
+        this.exit = exit;
     }
+
+
 
     public static void main(String[] args) {
         new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
