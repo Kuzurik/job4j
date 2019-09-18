@@ -33,7 +33,7 @@ public class MenuTracker {
     }
 
     /**
-     * performs an action depending on the keyю
+     * performs an action depending on the key
      * @param key
      */
 
