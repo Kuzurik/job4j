@@ -11,9 +11,5 @@
 
     <artifactId>chapter_002</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>chapter_003</module>
-    </modules>
-
 
 </project>
