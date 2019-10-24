@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Menu for tracker
  * @author Aliaksandr Kuzura (vorota-24@bk.ru)
@@ -11,7 +14,7 @@ public class MenuTracker {
     
     private Input input;
     private Tracker tracker;
-    private UserAction[] actions = new UserAction[7];
+    private List<UserAction> actions = new ArrayList<>();
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -23,13 +26,13 @@ public class MenuTracker {
      */
 
     public void fillActions(StartUI ui) {
-        this.actions[0] = new AddItem(0, "Add the new item" );
-        this.actions[1] = new ShowAll(1,  "Show all items");
-        this.actions[2] = new EditItem(2, "Edit item");
-        this.actions[3] = new DeleteItem(3, "Delete item");
-        this.actions[4] = new FindItemById(4, "Find item by id");
-        this.actions[5] = new FindItemByName(5, "Find item by name");
-        this.actions[6] = new Exit(ui ,6, "Exit program");
+        this.actions.add(0, new AddItem(0, "Add the new item" ));
+        this.actions.add(1, new ShowAll(1,  "Show all items"));
+        this.actions.add(2, new EditItem(2, "Edit item"));
+        this.actions.add(3, new DeleteItem(3, "Delete item"));
+        this.actions.add(4, new FindItemById(4, "Find item by id"));
+        this.actions.add(5, new FindItemByName(5, "Find item by name"));
+        this.actions.add(6, new Exit(ui ,6, "Exit program"));
     }
 
     /**
@@ -38,7 +41,7 @@ public class MenuTracker {
      */
 
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker); 
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /**
@@ -54,7 +57,7 @@ public class MenuTracker {
     }
 
     public int getActionsLength() {
-        return this.actions.length;
+        return this.actions.size();
     }
     
 
@@ -82,10 +85,9 @@ public class MenuTracker {
         }
 
         public void execute(Input input, Tracker tracker) {
-            Item[] item = tracker.findAll();
-            for (int i = 0; i != item.length; i++) {
-                System.out.printf("---%s---%s---%s" + System.lineSeparator(), item[i].getId(), item[i].getName(), item[i].getDecs());
-            }
+            List<Item> list = tracker.findAll();
+            for (Item value : list)
+                System.out.printf("---%s---%s---%s" + System.lineSeparator(), value.getId(), value.getName(), value.getDecs());
         }
     }
 
@@ -156,12 +158,12 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("---------------Ищем по имени-------------");
             String name = input.ask("Введите имя : ");
-            Item[] value = tracker.findByName(name);
-            if (value.length == 0) {
+            List<Item> list = tracker.findByName(name);
+            if (list.size() == 0) {
                 System.out.println("Ничего не найдено !");
             } else {
-                for (int i = 0; i != value.length; i++) {
-                    System.out.printf("---%s---%s---%s" + System.lineSeparator(), value[i].getId(), value[i].getName(), value[i].getDecs());
+                for (Item value : list) {
+                    System.out.printf("---%s---%s---%s" + System.lineSeparator(), value.getId(), value.getName(), value.getDecs());
                 }
             }
         }

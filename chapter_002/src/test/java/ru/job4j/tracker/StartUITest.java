@@ -108,7 +108,7 @@ public class StartUITest {
 		Tracker tracker = new Tracker();
         Input input = new StubInput(new String[] {"0", "test name", "desc", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("test name"));
+        assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
 
     /**
@@ -134,7 +134,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
         Input input = new StubInput(new String[] {"3", item.getId(), "6"});
         new StartUI(input, tracker).init();
-		assertThat(tracker.findAll().length, is(0));
+		assertThat(tracker.findAll().size(), is(0));
     }
 
 
