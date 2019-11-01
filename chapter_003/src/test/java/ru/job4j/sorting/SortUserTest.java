@@ -13,8 +13,8 @@ public class SortUserTest {
         SortUser user = new SortUser();
         List<User> list = new ArrayList<>();
         list.addAll(Arrays.asList(new User("Arkadiy", 47),
-                                 new User("Sergey", 31),
-                                 new User("Mikhail", 20)
+                                  new User("Sergey", 31),
+                                  new User("Mikhail", 20)
                                  ));
         Set<User> result = user.sort(list);
         Set<User> expected = new TreeSet<>();
@@ -22,6 +22,35 @@ public class SortUserTest {
                                       new User("Sergey", 31),
                                       new User("Arkadiy", 47)
                 ));
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenSortingNameLength() {
+        SortUser user = new SortUser();
+        List<User> list = new ArrayList<>();
+        User user1 = new User("Alex", 25);
+        User user2 = new User("Mikhail", 47);
+        User user3 = new User("Sergey", 31);
+        list.addAll(Arrays.asList(user1, user2, user3));
+        List<User> result = user.sortNameLength(list);
+        List<User> expected = new ArrayList<>();
+        expected.addAll(Arrays.asList(user1, user3, user2));
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenSortingAllFields() {
+        SortUser user = new SortUser();
+        List<User> list = new ArrayList<>();
+        User user1 = new User("Alex", 31);
+        User user2 = new User("Mikhail", 47);
+        User user3 = new User("Alex", 25);
+        User user4 = new User("Mikhail", 22);
+        list.addAll(Arrays.asList(user1, user2, user3, user4));
+        List<User> result = user.sortByAllFields(list);
+        List<User> expected = new ArrayList<>();
+        expected.addAll(Arrays.asList(user3, user1, user4, user2));
         assertThat(result, is(expected));
     }
 }
