@@ -105,7 +105,7 @@ public class Tracker {
     public List<Item> findByName(String key) {
          List<Item> result = new ArrayList<>();
 
-             for (Item value : this.items){
+             for (Item value : this.items) {
                 if (value != null && value.getName().equals(key)) {
                     result.add(value);
              }

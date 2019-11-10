@@ -1,7 +1,7 @@
 package ru.job4j.tracker;
 
 public class TrackerSingleInnerClass {
-    private TrackerSingleInnerClass() {}
+    private TrackerSingleInnerClass() { }
 
     public static TrackerSingleInnerClass getInstance() {
         return Holder.INSTANCE;

@@ -5,13 +5,13 @@ import java.util.*;
 public class SortUser {
 
 
-    public Set<User> sort (List<User> users) {
+    public Set<User> sort(List<User> users) {
         Set<User> set = new TreeSet<>();
         set.addAll(users);
         return set;
     }
 
-    public List<User> sortNameLength (List<User> users) {
+    public List<User> sortNameLength(List<User> users) {
         Comparator<User> comparator = new UserNameLength();
         List<User> list = new ArrayList<>();
         list.addAll(users);
@@ -19,7 +19,7 @@ public class SortUser {
         return list;
     }
 
-    public List<User> sortByAllFields (List<User> users) {
+    public List<User> sortByAllFields(List<User> users) {
         Comparator<User> comparator = new UserNameSort().thenComparing(new UserAgeSort());
         List<User> list = new ArrayList<>();
         list.addAll(users);
