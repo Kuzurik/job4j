@@ -4,7 +4,7 @@ public class TrackerSingleEager {
     private final static TrackerSingleEager INSTANCE = new TrackerSingleEager();
 
 
-    private TrackerSingleEager() {}
+    private TrackerSingleEager() { }
 
     public static TrackerSingleEager getInstance() {
         return INSTANCE;

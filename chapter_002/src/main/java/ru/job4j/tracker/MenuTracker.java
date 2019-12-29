@@ -26,13 +26,13 @@ public class MenuTracker {
      */
 
     public void fillActions(StartUI ui) {
-        this.actions.add(0, new AddItem(0, "Add the new item" ));
+        this.actions.add(0, new AddItem(0, "Add the new item"));
         this.actions.add(1, new ShowAll(1,  "Show all items"));
         this.actions.add(2, new EditItem(2, "Edit item"));
         this.actions.add(3, new DeleteItem(3, "Delete item"));
         this.actions.add(4, new FindItemById(4, "Find item by id"));
         this.actions.add(5, new FindItemByName(5, "Find item by name"));
-        this.actions.add(6, new Exit(ui ,6, "Exit program"));
+        this.actions.add(6, new Exit(ui, 6, "Exit program"));
     }
 
     /**
@@ -86,8 +86,9 @@ public class MenuTracker {
 
         public void execute(Input input, Tracker tracker) {
             List<Item> list = tracker.findAll();
-            for (Item value : list)
+            for (Item value : list) {
                 System.out.printf("---%s---%s---%s" + System.lineSeparator(), value.getId(), value.getName(), value.getDecs());
+            }
         }
     }
 

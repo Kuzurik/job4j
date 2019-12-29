@@ -26,7 +26,7 @@ public class ValidateInput extends ConsoleInput {
             }  catch (MenuOutException moe) {
             System.out.println("Please select key from menu.");
         }
-        }while (invalid);
+        } while (invalid);
         return value;
     }
 }
