@@ -16,70 +16,55 @@ public class Bank {
         this.accounts.remove(user);
     }
 
-    public void addAccountToUser(String passport, Account account) {
-        for(Map.Entry<User, List<Account>> entry : accounts.entrySet()) {
-            if(entry.getKey().getPassport().equals(passport)) {
-                List<Account> accounts = entry.getValue();
-                if(!accounts.contains(account)) {
-                    accounts.add(account);
-                }
-            }
-        }
-    }
-
-    public void deleteAccountFromUser(String passport, Account account) {
-        for (Map.Entry<User, List<Account>> entry : accounts.entrySet()) {
-            if(entry.getKey().getPassport().equals(passport)) {
-                List<Account> accounts = entry.getValue();
-                accounts.remove(account);
-                entry.setValue(accounts);
-            }
-        }
-    }
-
-    public List<Account> getUserAccounts(String passport) {
-        List<Account> list = new ArrayList<>();
-        for(Map.Entry<User, List<Account>> entry : accounts.entrySet()) {
-            if(entry.getKey().getPassport().equals(passport)) {
-                list = entry.getValue();
-            }
-        }
-        return list;
-    }
-
-    public boolean transferMoney(String srcPassport, String srcRequisites, String destPassport, String destRequisites, double amount) {
-        boolean result = false;
-        double value;
-        Account srcAccount = checkAccount(srcPassport,srcRequisites);
-        Account destAccount = checkAccount(destPassport, destRequisites);
-        if(!srcAccount.getRequisites().isEmpty()) {
-            value = srcAccount.getValue();
-            if (amount <= value) {
-                value -= amount;
-                srcAccount.setValue(value);
-                result = true;
-            }
-            if (result && !destAccount.getRequisites().isEmpty()) {
-                value = destAccount.getValue();
-                value += amount;
-                destAccount.setValue(value);
+    public User getUserByPassport(String passport) {
+        User result = null;
+        for (User userByPassport : accounts.keySet()) {
+            if (userByPassport.getPassport().equals(passport)) {
+                result = userByPassport;
+                break;
             }
         }
         return result;
     }
 
-    public Account checkAccount(String passport, String requisites) {
-        Account result = new Account();
-        for(Map.Entry<User, List<Account>> entry : accounts.entrySet()) {
-            if (entry.getKey().getPassport().equals(passport)) {
-                List<Account> temp = entry.getValue();
-                for (Account account : temp) {
-                    if (account.getRequisites().equals(requisites)) {
-                        result = account;
-                    }
-                }
+    public Account getAccount(String passport, String requisite) {
+        Account result = null;
+        User user = this.getUserByPassport(passport);
+        List<Account> list = accounts.get(user);
+        for (Account account : list) {
+            if (account.getRequisites().equals(requisite)) {
+                result = account;
+                break;
             }
         }
-            return result;
+        return result;
     }
+
+    public void addAccountToUser(String passport, Account account) {
+        List<Account> accounts = this.accounts.get(getUserByPassport(passport));
+        if (!accounts.contains(account)) {
+            accounts.add(account);
+        }
+
+
+    }
+
+    public void deleteAccountFromUser(String passport, Account account) {
+       this.accounts.get(getUserByPassport(passport)).remove(account);
+      }
+
+    public List<Account> getUserAccounts(String passport) {
+        return this.accounts.get(getUserByPassport(passport));
+    }
+
+    public boolean transferMoney(String srcPassport, String srcRequisites, String destPassport, String destRequisites, double amount) {
+        boolean result = false;
+        Account srcAccount = getAccount(srcPassport, srcRequisites);
+        Account destAccount = getAccount(destPassport, destRequisites);
+        if (!srcAccount.getRequisites().isEmpty() && !destAccount.getRequisites().isEmpty()) {
+            result = srcAccount.transfer(destAccount, amount);
+        }
+        return result;
+    }
+
 }

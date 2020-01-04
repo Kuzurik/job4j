@@ -6,13 +6,19 @@ public class Account {
     private double value;
     private String requisites;
 
-    public Account() {
-
-    }
-
     public Account(double value, String requisites) {
         this.value = value;
         this.requisites = requisites;
+    }
+
+    public boolean transfer(Account account, double amount) {
+        boolean result = false;
+        if (amount > 0 && amount <= value && account != null) {
+            this.value -= amount;
+            account.value += amount;
+            result = true;
+        }
+        return result;
     }
 
     public double getValue() {
