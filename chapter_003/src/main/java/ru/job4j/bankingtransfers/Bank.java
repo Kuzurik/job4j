@@ -61,8 +61,10 @@ public class Bank {
         boolean result = false;
         Account srcAccount = getAccount(srcPassport, srcRequisites);
         Account destAccount = getAccount(destPassport, destRequisites);
-        if (!srcAccount.getRequisites().isEmpty() && !destAccount.getRequisites().isEmpty()) {
-            result = srcAccount.transfer(destAccount, amount);
+        if (srcAccount != null && destAccount != null) {
+            srcAccount.transfer(destAccount, amount);
+            result = true;
+
         }
         return result;
     }
