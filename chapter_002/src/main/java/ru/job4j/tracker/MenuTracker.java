@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Menu for tracker
@@ -14,11 +15,13 @@ public class MenuTracker {
     
     private Input input;
     private Tracker tracker;
+    private final Consumer<String> output;
     private List<UserAction> actions = new ArrayList<>();
 
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker,Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     /**
@@ -41,7 +44,7 @@ public class MenuTracker {
      */
 
     public void select(int key) {
-        this.actions.get(key).execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker, this.output);
     }
 
     /**
@@ -49,11 +52,7 @@ public class MenuTracker {
      */
 
     public void show() {
-        for (UserAction action : this.actions) {
-            if (action != null) {
-                System.out.println(action.info());
-            }
-        }
+        this.actions.forEach(i -> this.output.accept(i.info()));
     }
 
     public int getActionsLength() {
@@ -67,13 +66,13 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Добавление новой заявки --------------");
+        public void execute(Input input, Tracker tracker,Consumer<String> output) {
+            output.accept("------------ Добавление новой заявки --------------");
             String name = input.ask("Введите имя заявки : ");
             String desc = input.ask("Введите комментарий : ");
             Item item = new Item(name, desc, System.currentTimeMillis());
             tracker.add(item);
-            System.out.printf("---%s---%s---%s" + System.lineSeparator(), item.getId(), item.getName(), item.getDecs());
+            output.accept(String.format("---%s---%s---%s", item.getId(), item.getName(), item.getDecs()));
         }
 
     }
@@ -84,10 +83,10 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
             List<Item> list = tracker.findAll();
             for (Item value : list) {
-                System.out.printf("---%s---%s---%s" + System.lineSeparator(), value.getId(), value.getName(), value.getDecs());
+                output.accept(String.format("---%s---%s---%s", value.getId(), value.getName(), value.getDecs()));
             }
         }
     }
@@ -98,17 +97,17 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
-            System.out.println("-----------------Редактируем заявку-----------------");
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
+            output.accept("-----------------Редактируем заявку-----------------");
             String id = input.ask("Введите id заявки : ");
             String name = input.ask("Введите новое имя : ");
             String desc = input.ask("Введите новый комментарий : ");
             Item item = new Item(name, desc, System.currentTimeMillis());
             boolean value = tracker.replace(id, item);
             if (!value) {
-                System.out.println("Ничего не найдено!");
+                output.accept("Ничего не найдено!");
             } else {
-                System.out.println("Операция произведена успешно !");
+                output.accept("Операция произведена успешно !");
             }
         }
     }
@@ -120,14 +119,14 @@ public class MenuTracker {
         }
 
 
-        public void execute(Input input, Tracker tracker) {
-            System.out.println("---------------Удаляем заявку----------------");
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
+           output.accept("---------------Удаляем заявку----------------");
             String id = input.ask("Введите id заявки : ");
             boolean value = tracker.delete(id);
             if (!value) {
-                System.out.println("Ничего не найдено!");
+                output.accept("Ничего не найдено!");
             } else {
-                System.out.println("Операция произведена успешно !");
+                output.accept("Операция произведена успешно !");
             }
         }
     }
@@ -138,14 +137,14 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
-            System.out.println("---------------Ищем по id-------------");
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
+            output.accept("---------------Ищем по id-------------");
             String id = input.ask("Введите id : ");
             Item value = tracker.findById(id);
             if (value.equals(null)) {
-                System.out.println("Ничего не найдено !");
+                output.accept("Ничего не найдено !");
             } else {
-                System.out.printf("---%s---%s---%s" + System.lineSeparator(), value.getId(), value.getName(), value.getDecs());
+                output.accept(String.format("---%s---%s---%s", value.getId(), value.getName(), value.getDecs()));
             }
         }
     }
@@ -156,15 +155,15 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
-            System.out.println("---------------Ищем по имени-------------");
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
+            output.accept("---------------Ищем по имени-------------");
             String name = input.ask("Введите имя : ");
             List<Item> list = tracker.findByName(name);
             if (list.size() == 0) {
-                System.out.println("Ничего не найдено !");
+                output.accept("Ничего не найдено !");
             } else {
                 for (Item value : list) {
-                    System.out.printf("---%s---%s---%s" + System.lineSeparator(), value.getId(), value.getName(), value.getDecs());
+                    output.accept(String.format("---%s---%s---%s", value.getId(), value.getName(), value.getDecs()));
                 }
             }
         }
@@ -179,8 +178,10 @@ public class MenuTracker {
         }
 
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
            ui.setExit(false);
         }
     }
+
+
 }

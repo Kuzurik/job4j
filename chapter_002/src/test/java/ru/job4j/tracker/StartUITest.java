@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.StringJoiner;
+import java.util.function.Consumer;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -17,9 +19,23 @@ import static org.junit.Assert.assertThat;
 public class StartUITest {
 	private final PrintStream stdout = System.out;
 	private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final Consumer<String> output = new Consumer<String>() {
+            private final PrintStream printStream = new PrintStream(out);
+
+            @Override
+            public void accept(String s) {
+            printStream.println(s);
+            }
+
+            @Override
+            public String toString() {
+            return out.toString();
+        }
+    };
 
 
-	@Before
+
+    @Before
 	public void loadOutput() {
 		System.setOut(new PrintStream(this.out));
 	}
@@ -39,9 +55,9 @@ public class StartUITest {
 		Item item = tracker.add(new Item("test name", "desc", 123L));
 		Item item1 = tracker.add(new Item("test name1", "desc", 124L));
 		Input input = new StubInput(new String[] {"1", "6"});
-		StartUI startUI = new StartUI(input, tracker);
+		StartUI startUI = new StartUI(input, tracker, this.output);
 		startUI.init();
-		assertThat(this.out.toString(),
+		assertThat(this.output.toString(),
 			        is(new StringBuilder()
 									.append(showMenu())
 									.append("---" + item.getId() + "---" + item.getName() + "---" + item.getDecs() + System.lineSeparator())
@@ -61,9 +77,9 @@ public class StartUITest {
 		Tracker tracker = new Tracker();
 		Item item = tracker.add(new Item("test name", "desc", 123L));
 		Input input = new StubInput(new String[] {"4", item.getId(), "6"});
-		new StartUI(input, tracker).init();
+		new StartUI(input, tracker, this.output).init();
 		assertThat(
-				this.out.toString(),
+				this.output.toString(),
 				is(
 						new StringBuilder()
 								.append(showMenu())
@@ -84,7 +100,7 @@ public class StartUITest {
 		Tracker tracker = new Tracker();
 		Item item = tracker.add(new Item("test name", "desc", 123L));
 		Input input = new StubInput((new String[] {"5", item.getName(), "6"}));
-		new StartUI(input, tracker).init();
+		new StartUI(input, tracker, this.output).init();
 		assertThat(
 				this.out.toString(),
 				is(
@@ -107,7 +123,7 @@ public class StartUITest {
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
 		Tracker tracker = new Tracker();
         Input input = new StubInput(new String[] {"0", "test name", "desc", "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
 
@@ -120,7 +136,7 @@ public class StartUITest {
 		Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
         Input input = new StubInput(new String[] {"2", item.getId(), "test replace", "replace the application", "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
     
@@ -133,7 +149,7 @@ public class StartUITest {
 		Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
         Input input = new StubInput(new String[] {"3", item.getId(), "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, this.output).init();
 		assertThat(tracker.findAll().size(), is(0));
     }
 
