@@ -2,13 +2,11 @@ package ru.job4j.bankingtransfers;
 
 import java.util.*;
 
-
 public class Bank {
     public Map<User, List<Account>> accounts = new HashMap<>();
 
     public User findUser(String passport) {
-        List<User> users = new ArrayList<>(this.accounts.keySet());
-        return users.stream().filter(user -> user.getPassport().equals(passport)).findFirst().get();
+         return this.accounts.keySet().stream().filter(usr -> usr.getPassport().equals(passport)).findFirst().orElse(null);
     }
 
     public void addUser(User user) {
@@ -23,24 +21,29 @@ public class Bank {
     public Account getAccount(String passport, String requisite) {
         User user = findUser(passport);
         List<Account> list = accounts.get(user);
-        return list.stream().filter(account -> account.getRequisites().equals(requisite)).findFirst().get();
+        return list.stream().filter(account -> account.getRequisites().equals(requisite)).findFirst().orElse(null);
     }
 
     public void addAccountToUser(String passport, Account account) {
-        List<Account> accounts = this.accounts.get(findUser(passport));
-        if (!accounts.contains(account)) {
-            accounts.add(account);
+        if (findUser(passport) != null) {
+            this.accounts.get(findUser(passport)).add(account);
         }
 
 
     }
 
     public void deleteAccountFromUser(String passport, Account account) {
-       this.accounts.get(findUser(passport)).remove(account);
+       if(findUser(passport) != null) {
+           this.accounts.get(findUser(passport)).remove(account);
+       }
       }
 
     public List<Account> getUserAccounts(String passport) {
-        return this.accounts.get(findUser(passport));
+        List<Account> accounts = new ArrayList<>();
+        if (findUser(passport) != null){
+            accounts = this.accounts.get(findUser(passport));
+        }
+        return accounts;
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisites, String destPassport, String destRequisites, double amount) {

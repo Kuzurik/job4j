@@ -21,17 +21,10 @@ public class Account {
         return result;
     }
 
-    public double getValue() {
-        return this.value;
-    }
-
     public String getRequisites() {
         return this.requisites;
     }
 
-    public void setValue(double value) {
-        this.value = value;
-    }
 
     @Override
     public String toString() {
