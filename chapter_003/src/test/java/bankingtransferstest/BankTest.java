@@ -26,7 +26,7 @@ public class BankTest {
         bank.addUser(new User("Alex", "900"));
         bank.addUser(new User("Nick", "650"));
         User result = new User("Alex", "900");
-        assertThat(result, is(bank.getUserByPassport("900")));
+        assertThat(result, is(bank.findUser("900")));
     }
 
     @Test

@@ -1,12 +1,15 @@
 package ru.job4j.bankingtransfers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 public class Bank {
     public Map<User, List<Account>> accounts = new HashMap<>();
+
+    public User findUser(String passport) {
+        List<User> users = new ArrayList<>(this.accounts.keySet());
+        return users.stream().filter(user -> user.getPassport().equals(passport)).findFirst().get();
+    }
 
     public void addUser(User user) {
         accounts.putIfAbsent(user, new ArrayList<>());
@@ -16,32 +19,15 @@ public class Bank {
         this.accounts.remove(user);
     }
 
-    public User getUserByPassport(String passport) {
-        User result = null;
-        for (User userByPassport : accounts.keySet()) {
-            if (userByPassport.getPassport().equals(passport)) {
-                result = userByPassport;
-                break;
-            }
-        }
-        return result;
-    }
 
     public Account getAccount(String passport, String requisite) {
-        Account result = null;
-        User user = this.getUserByPassport(passport);
+        User user = findUser(passport);
         List<Account> list = accounts.get(user);
-        for (Account account : list) {
-            if (account.getRequisites().equals(requisite)) {
-                result = account;
-                break;
-            }
-        }
-        return result;
+        return list.stream().filter(account -> account.getRequisites().equals(requisite)).findFirst().get();
     }
 
     public void addAccountToUser(String passport, Account account) {
-        List<Account> accounts = this.accounts.get(getUserByPassport(passport));
+        List<Account> accounts = this.accounts.get(findUser(passport));
         if (!accounts.contains(account)) {
             accounts.add(account);
         }
@@ -50,11 +36,11 @@ public class Bank {
     }
 
     public void deleteAccountFromUser(String passport, Account account) {
-       this.accounts.get(getUserByPassport(passport)).remove(account);
+       this.accounts.get(findUser(passport)).remove(account);
       }
 
     public List<Account> getUserAccounts(String passport) {
-        return this.accounts.get(getUserByPassport(passport));
+        return this.accounts.get(findUser(passport));
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisites, String destPassport, String destRequisites, double amount) {
