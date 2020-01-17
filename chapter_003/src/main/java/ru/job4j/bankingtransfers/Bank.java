@@ -25,23 +25,26 @@ public class Bank {
     }
 
     public void addAccountToUser(String passport, Account account) {
-        if (findUser(passport) != null) {
-            this.accounts.get(findUser(passport)).add(account);
+        User user = findUser(passport);
+        if (user != null) {
+            this.accounts.get(user).add(account);
         }
 
 
     }
 
     public void deleteAccountFromUser(String passport, Account account) {
-       if(findUser(passport) != null) {
-           this.accounts.get(findUser(passport)).remove(account);
+        User user = findUser(passport);
+       if(user != null) {
+           this.accounts.get(user).remove(account);
        }
       }
 
     public List<Account> getUserAccounts(String passport) {
         List<Account> accounts = new ArrayList<>();
-        if (findUser(passport) != null){
-            accounts = this.accounts.get(findUser(passport));
+        User user = findUser(passport);
+        if (user != null){
+            accounts = this.accounts.get(user);
         }
         return accounts;
     }
