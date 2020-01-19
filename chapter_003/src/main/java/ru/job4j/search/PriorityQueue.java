@@ -10,8 +10,8 @@ public class PriorityQueue {
        if (tasks.size() == 0) {
          tasks.add(task);
        } else {
-        int index = 0;
-        for (Task tsk : tasks) {
+        var index = 0;
+        for (var tsk : tasks) {
             if (tsk.getPriority() > task.getPriority()) {
                 tasks.add(index, task);
                 break;
