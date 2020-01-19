@@ -56,9 +56,9 @@ public class BankTest {
         bank.addUser(new User("Alex", "900"));
         bank.addAccountToUser("900", new Account(200, "1425"));
         bank.addAccountToUser("900", new Account(300,"1578"));
-        List<Account> result = new ArrayList<>();
-        result.add(new Account(200, "1425"));
-        result.add(new Account(300,"1578"));
+        List<Account> result = List.of(
+                new Account(200, "1425"),
+                new Account(300,"1578"));
         assertThat(result, is(bank.getUserAccounts("900")));
     }
 
@@ -69,8 +69,7 @@ public class BankTest {
         bank.addAccountToUser("900", new Account(200, "1425"));
         bank.addAccountToUser("900", new Account(300,"1578"));
         bank.deleteAccountFromUser("900", new Account(200, "1425"));
-        List<Account> result = new ArrayList<>();
-        result.add(new Account(300,"1578"));
+        List<Account> result =List.of(new Account(300,"1578"));
         assertThat(result, is(bank.getUserAccounts("900")));
     }
 
@@ -81,10 +80,9 @@ public class BankTest {
         bank.addAccountToUser("900", new Account(200, "1425"));
         bank.addAccountToUser("900", new Account(300,"1578"));
         bank.transferMoney("900", "1425", "900", "1578", 150);
-        List<Account> result = new ArrayList<>();
-        result.add(new Account(50, "1425"));
-        result.add(new Account(450,"1578"));
+        List<Account> result = List.of(
+                new Account(50, "1425"),
+                new Account(450,"1578"));
         assertThat(result, is(bank.getUserAccounts("900")));
     }
-
 }

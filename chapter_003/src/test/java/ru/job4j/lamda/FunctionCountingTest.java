@@ -12,7 +12,7 @@ public class FunctionCountingTest {
     public void whenLinearFunctionThenLinearResults() {
         FunctionCounting fun = new FunctionCounting();
         List<Double> result = fun.diapason(3, 6, x -> 3 * x + 2);
-        List<Double> expected = Arrays.asList(11D, 14D, 17D);
+        List<Double> expected = List.of(11D, 14D, 17D);
         assertThat(expected, is(result));
     }
 
@@ -20,7 +20,7 @@ public class FunctionCountingTest {
     public void whenSquareFunctionThenSquareResult() {
         FunctionCounting fun = new FunctionCounting();
         List<Double> result = fun.diapason(3, 6, x -> Math.pow(2 * x, 2) + (2 * x) + 3);
-        List<Double> expected = Arrays.asList(45D, 75D, 113D);
+        List<Double> expected = List.of(45D, 75D, 113D);
         assertThat(expected, is(result));
     }
 
@@ -28,7 +28,7 @@ public class FunctionCountingTest {
     public void whenLogarithmicFunctionThenLogarithmicResult() {
         FunctionCounting fun = new FunctionCounting();
         List<Double> result = fun.diapason(3, 6, x -> Math.log(x));
-        List<Double> expected = Arrays.asList(Math.log(3D), Math.log(4D), Math.log(5D));
+        List<Double> expected =List.of(Math.log(3D), Math.log(4D), Math.log(5D));
         assertThat(expected, is(result));
     }
 }

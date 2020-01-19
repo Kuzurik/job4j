@@ -21,10 +21,10 @@ public class ConvertingTest {
         Student student4 = new Student("Max", 60);
         List<Student> students = List.of(student, student1, student2, student4);
         Map<String, Student> result = converting.convert(students);
-        Map<String, Student> expected = new HashMap<>();
-        expected.put("Alex", student);
-        expected.put("Max", student1);
-        expected.put("Igor", student2);
+        Map<String, Student> expected = Map.of(
+                "Alex", student,
+                "Max", student1,
+                "Igor", student2);
         assertThat(result,is(expected));
     }
 }
