@@ -14,11 +14,14 @@ public class IteratorForEven implements Iterator {
     @Override
     public boolean hasNext() {
         boolean result = false;
-        for(int i = index; i != numbers.length; i++) {
-            if (numbers[i] % 2 == 0) {
+        while (this.numbers.length > index) {
+            if (this.numbers[index] % 2 == 0) {
                 result = true;
                 break;
+            } else {
+                index++;
             }
+
         }
         return result;
     }
@@ -26,9 +29,6 @@ public class IteratorForEven implements Iterator {
     @Override
     public Object next() {
         if(!hasNext()) throw new NoSuchElementException();
-        while (this.numbers[index] % 2 != 0 && index < numbers.length -1){
-                index++;
-        }
         return numbers[index++];
     }
 }
