@@ -34,6 +34,10 @@ public class SimpleArray<T> {
         position--;
     }
 
+    public int length() {
+        return this.objects.length;
+    }
+
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             private int index = 0;
