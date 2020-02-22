@@ -1,13 +1,14 @@
 package generic.implementationSimpleArray;
 
-public class AbstractStore<T extends Base> extends SimpleArray<T> implements Store {
+public class AbstractStore<T extends Base> implements Store {
+    private SimpleArray<Base> values;
 
     public AbstractStore(int size) {
-        super(size);
+        this.values = new SimpleArray(size);
     }
     @Override
     public void add(Base model) {
-        super.add((T) model);
+        this.values.add(model);
     }
 
     @Override
@@ -15,7 +16,7 @@ public class AbstractStore<T extends Base> extends SimpleArray<T> implements Sto
         boolean result = false;
         int index = this.getIndex(id);
             if (index > -1) {
-            super.set(index,(T) model);
+            this.values.set(index, model);
             result = true;
         }
         return result;
@@ -26,7 +27,7 @@ public class AbstractStore<T extends Base> extends SimpleArray<T> implements Sto
         boolean result = false;
         Base base = this.findById(id);
         if (base.getId().equals(id)) {
-            super.remove(this.getIndex(id));
+            this.values.remove(this.getIndex(id));
             result = true;
         }
         return result;
@@ -35,9 +36,9 @@ public class AbstractStore<T extends Base> extends SimpleArray<T> implements Sto
     @Override
     public Base findById(String id) {
         Base base = null;
-        for (int i = 0; i != super.length(); i++) {
-            if (super.get(i).getId().equals(id)) {
-                base = super.get(i);
+        for (int i = 0; i != this.values.length(); i++) {
+            if (this.values.get(i).getId().equals(id)) {
+                base = this.values.get(i);
                 break;
             }
        }
@@ -46,8 +47,8 @@ public class AbstractStore<T extends Base> extends SimpleArray<T> implements Sto
 
     public int getIndex(String id) {
         int index = 0;
-        for (int i = 0; i != super.length(); i++) {
-            if (super.get(i).getId().equals(id)) {
+        for (int i = 0; i != this.values.length(); i++) {
+            if (this.values.get(i).getId().equals(id)) {
                 index = i;
                 break;
             }

@@ -14,7 +14,7 @@ public class RoleStoreTest {
     public void whenAddRole() {
         RoleStore roleStore = new RoleStore(1);
         roleStore.add(new Role("Mark"));
-        assertThat(roleStore.get(0).getId(), is("Mark"));
+        assertThat(roleStore.findById("Mark"), is(new Role("Mark")));
     }
 
     @Test
@@ -24,7 +24,7 @@ public class RoleStoreTest {
         roleStore.add(new Role("Alex"));
         roleStore.add(new Role("Lex"));
         roleStore.replace("Alex", new Role("Michel"));
-        assertThat(roleStore.get(1).getId(), is("Michel"));
+        assertThat(roleStore.findById("Michel"), is(new Role("Michel")));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class RoleStoreTest {
         roleStore.add(new Role("Mark"));
         roleStore.add(new Role("Alex"));
         roleStore.add(new Role("Lex"));
-        assertThat(roleStore.findById("Alex").getId(), is("Alex"));
+        assertThat(roleStore.findById("Alex"), is(new Role("Alex")));
     }
 
     @Test
