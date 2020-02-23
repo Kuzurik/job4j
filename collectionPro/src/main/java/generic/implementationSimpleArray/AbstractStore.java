@@ -25,9 +25,9 @@ public class AbstractStore<T extends Base> implements Store {
     @Override
     public boolean delete(String id) {
         boolean result = false;
-        Base base = this.findById(id);
-        if (base.getId().equals(id)) {
-            this.values.remove(this.getIndex(id));
+        int index = this.getIndex(id);
+        if (this.values.get(index).getId().equals(id)) {
+            this.values.remove(index);
             result = true;
         }
         return result;
