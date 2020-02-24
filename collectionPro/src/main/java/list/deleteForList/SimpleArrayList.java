@@ -24,10 +24,12 @@ public class SimpleArrayList<E> {
     }
 
     public E delete() {
-        Node<E> result = this.first;
-        this.first = this.first.next;
+        Node<E> value = this.first;
+        E result = value.data;
+        Node<E> nextLink = value.next;
+        this.first = nextLink;
         size--;
-        return this.get(0);
+        return result;
     }
 
     private static class Node<E> {
