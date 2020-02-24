@@ -1,6 +1,6 @@
 package generic.implementationSimpleArray;
 
-public class AbstractStore<T extends Base> implements Store {
+public class AbstractStore<T extends Base> implements Store<T> {
     private SimpleArray<Base> values;
 
     public AbstractStore(int size) {
@@ -34,7 +34,7 @@ public class AbstractStore<T extends Base> implements Store {
     }
 
     @Override
-    public Base findById(String id) {
+    public T findById(String id) {
         Base base = null;
         for (int i = 0; i != this.values.length(); i++) {
             if (this.values.get(i).getId().equals(id)) {
@@ -42,7 +42,7 @@ public class AbstractStore<T extends Base> implements Store {
                 break;
             }
        }
-        return base;
+        return (T) base;
     }
 
     public int getIndex(String id) {
