@@ -5,7 +5,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ListArray<T> implements Iterable{
+public class ListArray<E> implements Iterable<E>{
     private Object[] container;
     private final static int DEFAULT_CAPACITY = 10;
     private int position = 0;
@@ -15,7 +15,7 @@ public class ListArray<T> implements Iterable{
         this.container = new Object[DEFAULT_CAPACITY];
     }
 
-    public void add(T model) {
+    public void add(E model) {
         if (this.container.length == this.position) {
             this.container = Arrays.copyOf(this.container, this.position * 2);
         }
@@ -23,11 +23,11 @@ public class ListArray<T> implements Iterable{
         modCount++;
     }
 
-    public T get(int index) {
+    public E get(int index) {
         if (index > this.container.length) {
             throw new IndexOutOfBoundsException();
         }
-        return (T) container[index];
+        return (E) container[index];
     }
 
     public void remove(int index) {
@@ -41,25 +41,25 @@ public class ListArray<T> implements Iterable{
 
 
     @Override
-    public Iterator iterator() {
-        return new Iterator() {
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
             private int expectedModCount = modCount;
             private int cursor = 0;
 
             @Override
             public boolean hasNext() {
-                    if (expectedModCount != modCount) {
-                        throw new ConcurrentModificationException();
-                    }
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return cursor < position;
             }
 
             @Override
-            public Object next() {
+            public E next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return container[cursor++];
+                return (E) container[cursor++];
             }
         };
     }
