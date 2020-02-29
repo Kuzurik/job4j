@@ -24,12 +24,14 @@ public class SimpleArrayList<E> {
     }
 
     public E delete() {
-        Node<E> value = this.first;
-        E result = value.data;
-        Node<E> nextLink = value.next;
-        this.first = nextLink;
+        if(this.size == 0) {
+          throw new ArrayIndexOutOfBoundsException();
+        }
+        Node<E> values = this.first;
+        this.first = this.first.next;
+        values.next = null;
         size--;
-        return result;
+        return values.data;
     }
 
     private static class Node<E> {
