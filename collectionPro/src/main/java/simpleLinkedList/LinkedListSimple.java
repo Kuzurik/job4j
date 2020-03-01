@@ -72,6 +72,15 @@ public class LinkedListSimple<E> implements Iterable<E> {
         return unlink(node(index));
     }
 
+    public E delete() {
+        Node<E> result = this.first;
+        if (this.size != 0) {
+            this.first = result.next;
+            size--;
+        }
+        return result.item;
+    }
+
     private static class Node<E> {
         E item;
         Node<E> next;
