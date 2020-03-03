@@ -1,5 +1,7 @@
 package list.deleteForList;
 
+import java.util.NoSuchElementException;
+
 public class SimpleArrayList<E> {
     private int size;
     private Node<E> first;
@@ -25,7 +27,7 @@ public class SimpleArrayList<E> {
 
     public E delete() {
         if(this.size == 0) {
-          throw new ArrayIndexOutOfBoundsException();
+          throw new NoSuchElementException();
         }
         Node<E> values = this.first;
         this.first = this.first.next;
