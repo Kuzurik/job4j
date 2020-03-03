@@ -1,18 +1,18 @@
 package simpleLinkedList;
 
 public class SimpleQueue<E> {
-   private SimpleStack<E> container = new SimpleStack<>();
-   private SimpleStack<E> reversContainer = new SimpleStack<>();
+   private SimpleStack<E> out = new SimpleStack<>();
+   private SimpleStack<E> in = new SimpleStack<>();
 
    public E poll() {
-        while (container.getSize() < 0) {
-            reversContainer.push(container.poll());
+        while (this.out.getSize() < 0) {
+            this.in.push(this.out.poll());
         }
-    return container.poll();
+    return this.out.poll();
     }
 
     public void push(E value) {
-        this.container.push(value);
+        this.out.push(value);
     }
 
 }
