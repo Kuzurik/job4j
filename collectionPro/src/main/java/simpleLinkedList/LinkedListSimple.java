@@ -26,11 +26,14 @@ public class LinkedListSimple<E> implements Iterable<E> {
     }
 
     public E get(int index) {
+        if(index > this.size) {
+            throw new NoSuchElementException();
+        }
         Node<E> result = this.first;
         for (int i = 0; i < index; i++) {
-            result = result.next;
+                result = result.next;
         }
-        return result.item;
+            return result.item;
     }
 
     E unlink(Node<E> x) {
@@ -69,6 +72,9 @@ public class LinkedListSimple<E> implements Iterable<E> {
     }
 
     public E remove(int index) {
+        if(index > this.size) {
+            throw new NoSuchElementException();
+        }
         return unlink(node(index));
     }
 
