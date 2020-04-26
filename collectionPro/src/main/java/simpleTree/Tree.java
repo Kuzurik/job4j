@@ -1,10 +1,9 @@
 package simpleTree;
 
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.Queue;
+import java.util.*;
 
 public class Tree<E> implements SimpleTree<E> {
+
     private final Node<E> root;
 
     Tree(final E root) {
@@ -13,7 +12,7 @@ public class Tree<E> implements SimpleTree<E> {
 
     @Override
     public boolean add(E parent, E child) {
-        if (findBy(child).isPresent()){
+        if (findBy(child).isPresent()) {
             return false;
         }
         Node<E> current = findBy(parent).orElse(null);
@@ -23,6 +22,20 @@ public class Tree<E> implements SimpleTree<E> {
             root.children.add(new Node<>(child));
         }
         return true;
+    }
+
+    public boolean isBinary() {
+        boolean result = true;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> node = data.poll();
+            if (node.children.size() > 2) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 
     @Override
