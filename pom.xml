@@ -19,6 +19,7 @@
         <module>chapter_002</module>
         <module>chapter_003</module>
         <module>collectionPro</module>
+        <module>chapter_002_input-output</module>
     </modules>
 
     <build>
