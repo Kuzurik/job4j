@@ -31,9 +31,11 @@ public class Tree<E> implements SimpleTree<E> {
         while (!data.isEmpty()) {
             Node<E> node = data.poll();
             if (node.children.size() > 2) {
+
                 result = false;
                 break;
             }
+            data.addAll(node.children);
         }
         return result;
     }
