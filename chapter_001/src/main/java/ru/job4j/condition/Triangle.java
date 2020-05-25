@@ -10,17 +10,7 @@ package ru.job4j.condition;
  */
 
 public class Triangle {
-    private Point first;
-    private Point second;
-    private Point third;
-
-    public Triangle(Point a, Point b, Point c) {
-        this.first = a;
-        this.second = b;
-        this.third = c;
-    }
-
-
+   
     /**
      *  Method of calculating the half-perimeter by side length
      * @param a distance between points a b.

@@ -1,6 +1,8 @@
-package simpleLinkedList;
+package ru.job4j.simplelinkedlist;
 
 import org.junit.Test;
+
+import ru.job4j.simplelinkedlist.SimpleStack;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

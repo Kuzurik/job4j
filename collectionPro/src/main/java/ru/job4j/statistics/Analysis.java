@@ -1,4 +1,4 @@
-package statistics;
+package ru.job4j.statistics;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,11 +37,15 @@ public Info diff(List<User> prev, List<User> current) {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) { 
+            	return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+            	return false;
+            }
             User user = (User) o;
-            return Objects.equals(id, user.id) &&
-                    Objects.equals(name, user.name);
+            return Objects.equals(id, user.id)
+                    && Objects.equals(name, user.name);
         }
 
         @Override
@@ -51,8 +55,8 @@ public Info diff(List<User> prev, List<User> current) {
     }
 
     public static class Info {
-        int added;
-        int changed;
+        public int added;
+        public int changed;
         public int deleted;
     }
 }

@@ -1,4 +1,4 @@
-package readFile;
+package ru.job4j.readfile;
 
 import java.io.FileInputStream;
 

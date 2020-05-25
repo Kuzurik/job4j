@@ -1,11 +1,11 @@
-package iterator.iteratorConvert;
+package ru.job4j.iterator.iteratorconvert;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class IteratorConverter {
 
-            Iterator<Integer> convert (Iterator<Iterator<Integer>> it) {
+            public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
             return new Iterator<Integer>() {
 
                 private Iterator<Integer> tmp = it.next();

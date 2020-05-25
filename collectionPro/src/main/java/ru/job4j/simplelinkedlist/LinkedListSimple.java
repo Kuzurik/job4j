@@ -1,4 +1,4 @@
-package simpleLinkedList;
+package ru.job4j.simplelinkedlist;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -26,7 +26,7 @@ public class LinkedListSimple<E> implements Iterable<E> {
     }
 
     public E get(int index) {
-        if(index > this.size) {
+        if (index > this.size) {
             throw new NoSuchElementException();
         }
         Node<E> result = this.first;
@@ -72,7 +72,7 @@ public class LinkedListSimple<E> implements Iterable<E> {
     }
 
     public E remove(int index) {
-        if(index > this.size) {
+        if (index > this.size) {
             throw new NoSuchElementException();
         }
         return unlink(node(index));

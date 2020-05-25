@@ -1,4 +1,4 @@
-package hashTable;
+package ru.job4j.hashtable;
 
 import java.util.*;
 
@@ -6,7 +6,8 @@ import java.util.*;
 public class SimpleHashTable<K, V> implements Iterable<V> {
 
     private static final int DEFAULT_CAPACITY = 16;
-    private Node<K, V>[] items =(Node<K, V>[]) new Node[DEFAULT_CAPACITY];
+    
+	private Node<K, V>[] items = (Node<K, V>[]) new Node[DEFAULT_CAPACITY];
     private int size = 0;
     private int modCount = 0;
 
@@ -31,12 +32,12 @@ public class SimpleHashTable<K, V> implements Iterable<V> {
     }
 
     public int findBucket(K key) {
-        return hash(key) & (items.length -1);
+        return hash(key) & (items.length - 1);
     }
 
     public int hash(K key) {
-        int h;
-        return (h = key.hashCode()) ^ h >>> 16;
+        int h = key.hashCode();
+        return h ^ h >>> 16;
     }
 
     public V get(K key) {
@@ -50,7 +51,7 @@ public class SimpleHashTable<K, V> implements Iterable<V> {
     public boolean delete(K key) {
         boolean result = false;
         int position = findBucket(key);
-        if (this.items[position].getKey().equals(key)){
+        if (this.items[position].getKey().equals(key)) {
             this.items[position] = null;
             this.size--;
             this.modCount++;
@@ -115,11 +116,15 @@ public class SimpleHashTable<K, V> implements Iterable<V> {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+            	return true;
+            }
+            if (o == null || getClass() != o.getClass()) { 
+            	return false;
+            }
             Node<?, ?> node = (Node<?, ?>) o;
-            return Objects.equals(key, node.key) &&
-                    Objects.equals(value, node.value);
+            return Objects.equals(key, node.key)
+                    && Objects.equals(value, node.value);
         }
 
         @Override

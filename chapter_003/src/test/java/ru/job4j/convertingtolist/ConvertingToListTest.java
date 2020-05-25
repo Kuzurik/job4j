@@ -1,6 +1,8 @@
-package ru.job4j.convertingToList;
+package ru.job4j.convertingtolist;
 
 import org.junit.Test;
+
+import ru.job4j.convertingtolist.ConvertingToList;
 
 import java.util.List;
 

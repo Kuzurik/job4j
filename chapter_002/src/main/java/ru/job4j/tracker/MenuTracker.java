@@ -18,7 +18,7 @@ public class MenuTracker {
     private final Consumer<String> output;
     private List<UserAction> actions = new ArrayList<>();
 
-    public MenuTracker(Input input, Tracker tracker,Consumer<String> output) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
         this.output = output;
@@ -66,7 +66,7 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker,Consumer<String> output) {
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
             output.accept("------------ Добавление новой заявки --------------");
             String name = input.ask("Введите имя заявки : ");
             String desc = input.ask("Введите комментарий : ");

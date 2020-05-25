@@ -1,4 +1,4 @@
-package generic.implementationSimpleArray;
+package ru.job4j.generics;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -16,7 +16,7 @@ public class SimpleArray<T> {
         }
 
     public void set(int index, T model) {
-       if(index > position) {
+       if (index > position) {
            throw new IndexOutOfBoundsException();
        }
         this.objects[index] = model;
@@ -30,7 +30,7 @@ public class SimpleArray<T> {
         if (index > this.position) {
             throw new IndexOutOfBoundsException();
         }
-        System.arraycopy(this.objects, index + 1, this.objects, index, this.objects.length - 1 - index );
+        System.arraycopy(this.objects, index + 1, this.objects, index, this.objects.length - 1 - index);
         position--;
     }
 
@@ -43,7 +43,7 @@ public class SimpleArray<T> {
             private int index = 0;
             @Override
             public boolean hasNext() {
-                return this.index < position ;
+                return this.index < position;
             }
 
             @Override

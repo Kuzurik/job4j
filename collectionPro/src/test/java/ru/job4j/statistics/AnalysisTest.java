@@ -1,6 +1,8 @@
-package statistics;
+package ru.job4j.statistics;
 
 import org.junit.Test;
+
+import ru.job4j.statistics.Analysis;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package analysis;
+package ru.job4j.analysis;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;

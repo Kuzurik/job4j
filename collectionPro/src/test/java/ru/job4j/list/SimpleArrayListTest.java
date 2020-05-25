@@ -1,6 +1,9 @@
-package list.deleteForList;
+package ru.job4j.list;
 
 import org.junit.Test;
+
+import ru.job4j.list.SimpleArrayList;
+
 import org.junit.Before;
 
 import static org.hamcrest.core.Is.is;

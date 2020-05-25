@@ -1,4 +1,4 @@
-package ru.job4j.stremApiUpgrade;
+package ru.job4j.stremapiupgrade;
 
 import java.util.Comparator;
 import java.util.List;

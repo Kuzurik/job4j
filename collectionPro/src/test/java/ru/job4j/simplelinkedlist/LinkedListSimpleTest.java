@@ -1,7 +1,9 @@
-package simpleLinkedList;
+package ru.job4j.simplelinkedlist;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ru.job4j.simplelinkedlist.LinkedListSimple;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package simpleLinkedList;
+package ru.job4j.simplelinkedlist;
 
 public class SimpleStack<E> {
     private LinkedListSimple<E> linked = new LinkedListSimple<>();

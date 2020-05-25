@@ -1,8 +1,10 @@
-package simpleArrayList;
+package ru.job4j.simplearraylist;
 
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ru.job4j.simplearraylist.ListArray;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -29,7 +31,7 @@ public class ListArrayTest {
 
     @Test
     public void whenAddThirtyElements() {
-        for(int i = 0; i != 30; i++) {
+        for (int i = 0; i != 30; i++) {
             list.add(i);
         }
     }

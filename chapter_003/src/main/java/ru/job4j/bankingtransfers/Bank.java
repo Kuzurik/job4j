@@ -35,7 +35,7 @@ public class Bank {
 
     public void deleteAccountFromUser(String passport, Account account) {
         User user = findUser(passport);
-       if(user != null) {
+       if (user != null) {
            this.accounts.get(user).remove(account);
        }
       }
@@ -43,7 +43,7 @@ public class Bank {
     public List<Account> getUserAccounts(String passport) {
         List<Account> accounts = new ArrayList<>();
         User user = findUser(passport);
-        if (user != null){
+        if (user != null) {
             accounts = this.accounts.get(user);
         }
         return accounts;

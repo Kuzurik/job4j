@@ -1,7 +1,7 @@
-package readCnfig;
+package ru.job4j.readconfig;
 
 import org.junit.Test;
-import readConfig.Config;
+import ru.job4j.readconfig.Config;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

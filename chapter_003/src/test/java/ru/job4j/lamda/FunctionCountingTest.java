@@ -2,7 +2,6 @@ package ru.job4j.lamda;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -28,7 +27,7 @@ public class FunctionCountingTest {
     public void whenLogarithmicFunctionThenLogarithmicResult() {
         FunctionCounting fun = new FunctionCounting();
         List<Double> result = fun.diapason(3, 6, x -> Math.log(x));
-        List<Double> expected =List.of(Math.log(3D), Math.log(4D), Math.log(5D));
+        List<Double> expected = List.of(Math.log(3D), Math.log(4D), Math.log(5D));
         assertThat(expected, is(result));
     }
 }

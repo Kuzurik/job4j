@@ -1,4 +1,4 @@
-package iterator.iteratorForMatrix;
+package ru.job4j.iterator.iteratorformatrix;
 
 import java.util.Iterator;
 
@@ -20,7 +20,7 @@ public class IteratorForMatrix implements Iterator<Integer> {
     public Integer next() {
         int value = matrix[this.row][this.col];
         col++;
-        if (col >= matrix[row].length){
+        if (col >= matrix[row].length) {
             row++;
             col = 0;
         }

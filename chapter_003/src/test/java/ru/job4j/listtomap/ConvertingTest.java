@@ -1,10 +1,10 @@
-package listToMap;
+package ru.job4j.listtomap;
 
 import org.junit.Test;
-import ru.job4j.listToMap.Converting;
-import ru.job4j.listToMap.Student;
 
-import java.util.HashMap;
+import ru.job4j.listtomap.Converting;
+import ru.job4j.listtomap.Student;
+
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +25,6 @@ public class ConvertingTest {
                 "Alex", student,
                 "Max", student1,
                 "Igor", student2);
-        assertThat(result,is(expected));
+        assertThat(result, is(expected));
     }
 }

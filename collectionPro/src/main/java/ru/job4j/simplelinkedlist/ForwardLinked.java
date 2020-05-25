@@ -1,4 +1,4 @@
-package simpleLinkedList;
+package ru.job4j.simplelinkedlist;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

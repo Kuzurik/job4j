@@ -1,7 +1,8 @@
-package simpleSet;
+package ru.job4j.simpleset;
 
-import simpleArrayList.ListArray;
 import java.util.Iterator;
+
+import ru.job4j.simplearraylist.ListArray;
 
 public class SimpleSet<E> implements Iterable<E> {
     private ListArray<E> values = new ListArray<>();

@@ -1,7 +1,8 @@
-package implementationSimpleArray;
+package ru.job4j.implementationsimplearray;
 
-import generic.implementationSimpleArray.Role;
-import generic.implementationSimpleArray.RoleStore;
+import ru.job4j.generics.Role;
+import ru.job4j.generics.RoleStore;
+
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;

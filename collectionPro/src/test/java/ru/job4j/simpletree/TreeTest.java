@@ -1,11 +1,14 @@
-package simpleTree;
+package ru.job4j.simpletree;
 
 import org.junit.Test;
+
+import ru.job4j.simpletree.Tree;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class TreeTest {
+	
     @Test
     public void when6ElFindLastThen6() {
         Tree<Integer> tree = new Tree<>(1);

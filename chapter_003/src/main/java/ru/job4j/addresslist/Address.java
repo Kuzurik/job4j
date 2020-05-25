@@ -1,4 +1,4 @@
-package ru.job4j.addressList;
+package ru.job4j.addresslist;
 
 import java.util.Objects;
 
@@ -21,23 +21,26 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", home=" + home +
-                ", apartment=" + apartment +
-                '}';
+        return "Address{" + "city='" + city + '\'' 
+                + ", street='" + street + '\'' 
+                + ", home=" + home 
+                + ", apartment=" + apartment 
+                + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+        	return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+        	return false;
+        }
         Address address = (Address) o;
-        return home == address.home &&
-                apartment == address.apartment &&
-                Objects.equals(city, address.city) &&
-                Objects.equals(street, address.street);
+        return home == address.home 
+                && apartment == address.apartment 
+                && Objects.equals(city, address.city) 
+                && Objects.equals(street, address.street);
     }
 
     @Override

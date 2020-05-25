@@ -16,7 +16,7 @@ public class Group {
                   flatMap(student -> student.getUnits().stream().map(unit -> new Holder(unit, student.getName()))).
                   collect(Collectors.groupingBy(Holder::getUnit, Collector.of(
                           HashSet::new, (set, value) -> set.add(value.getName()),
-                          (left, right) -> {left.addAll(right);
+                          (left, right) -> { left.addAll(right);
                           return left;
                           })));
 

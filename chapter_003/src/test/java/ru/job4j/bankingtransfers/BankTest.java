@@ -1,11 +1,10 @@
-package bankingtransferstest;
+package ru.job4j.bankingtransfers;
 
 import org.junit.Test;
 import ru.job4j.bankingtransfers.Account;
 import ru.job4j.bankingtransfers.Bank;
 import ru.job4j.bankingtransfers.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -34,7 +33,7 @@ public class BankTest {
         Bank bank = new Bank();
         bank.addUser(new User("Alex", "900"));
         bank.addAccountToUser("900", new Account(200, "1425"));
-        bank.addAccountToUser("900", new Account(300,"1578"));
+        bank.addAccountToUser("900", new Account(300, "1578"));
         Account result = new Account(200, "1425");
         assertThat(result, is(bank.getAccount("900", "1425")));
     }
@@ -55,10 +54,10 @@ public class BankTest {
         Bank bank = new Bank();
         bank.addUser(new User("Alex", "900"));
         bank.addAccountToUser("900", new Account(200, "1425"));
-        bank.addAccountToUser("900", new Account(300,"1578"));
+        bank.addAccountToUser("900", new Account(300, "1578"));
         List<Account> result = List.of(
                 new Account(200, "1425"),
-                new Account(300,"1578"));
+                new Account(300, "1578"));
         assertThat(result, is(bank.getUserAccounts("900")));
     }
 
@@ -67,9 +66,9 @@ public class BankTest {
         Bank bank = new Bank();
         bank.addUser(new User("Alex", "900"));
         bank.addAccountToUser("900", new Account(200, "1425"));
-        bank.addAccountToUser("900", new Account(300,"1578"));
+        bank.addAccountToUser("900", new Account(300, "1578"));
         bank.deleteAccountFromUser("900", new Account(200, "1425"));
-        List<Account> result =List.of(new Account(300,"1578"));
+        List<Account> result = List.of(new Account(300, "1578"));
         assertThat(result, is(bank.getUserAccounts("900")));
     }
 
@@ -78,11 +77,11 @@ public class BankTest {
         Bank bank = new Bank();
         bank.addUser(new User("Alex", "900"));
         bank.addAccountToUser("900", new Account(200, "1425"));
-        bank.addAccountToUser("900", new Account(300,"1578"));
+        bank.addAccountToUser("900", new Account(300, "1578"));
         bank.transferMoney("900", "1425", "900", "1578", 150);
         List<Account> result = List.of(
                 new Account(50, "1425"),
-                new Account(450,"1578"));
+                new Account(450, "1578"));
         assertThat(result, is(bank.getUserAccounts("900")));
     }
 }

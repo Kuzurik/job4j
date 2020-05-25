@@ -1,4 +1,4 @@
-package ru.job4j.addressList;
+package ru.job4j.addresslist;
 
 import java.util.Comparator;
 import java.util.List;

@@ -1,4 +1,4 @@
-package map;
+package ru.job4j.map;
 
 
 import java.util.Objects;
@@ -22,11 +22,15 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
-        return children == user.children &&
-                birthday == user.birthday &&
-                Objects.equals(name, user.name);
+        return children == user.children
+                && birthday == user.birthday
+                && Objects.equals(name, user.name);
     }
 }

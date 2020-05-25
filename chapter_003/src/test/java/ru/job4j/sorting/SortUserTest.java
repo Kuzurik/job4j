@@ -30,7 +30,7 @@ public class SortUserTest {
         User user3 = new User("Sergey", 31);
         List<User> list = List.of(user1, user2, user3);
         List<User> result = user.sortNameLength(list);
-        List<User> expected =List.of(user1, user3, user2);
+        List<User> expected = List.of(user1, user3, user2);
         assertThat(result, is(expected));
     }
 

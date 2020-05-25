@@ -1,8 +1,9 @@
-package ru.job4j.streamApiUpgrade;
+package ru.job4j.streamapiupgrade;
 
 import org.junit.Test;
-import ru.job4j.stremApiUpgrade.Filter;
-import ru.job4j.stremApiUpgrade.Student;
+
+import ru.job4j.stremapiupgrade.Filter;
+import ru.job4j.stremapiupgrade.Student;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class FilterTest {
                 new Student("Nikita", 50),
                 new Student("Valera", 30));
        List<Student> result = filter.levelOf(students, 20);
-       List<Student> expected = List.of(new Student("Valera", 30),new Student("Nikita", 50));
+       List<Student> expected = List.of(new Student("Valera", 30), new Student("Nikita", 50));
        assertThat(result, is(expected));
     }
 }

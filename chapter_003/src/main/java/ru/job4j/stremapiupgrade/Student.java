@@ -1,8 +1,8 @@
-package ru.job4j.stremApiUpgrade;
+package ru.job4j.stremapiupgrade;
 
 import java.util.Objects;
 
-public class Student implements Comparable<Student>{
+public class Student implements Comparable<Student> {
     private String name;
     private  Integer score;
 
@@ -22,19 +22,23 @@ public class Student implements Comparable<Student>{
 
     @Override
     public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", score=" + score +
-                '}';
+        return "Student{" 
+                + "name='" + name + '\'' 
+                + ", score=" + score 
+                + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) { 
+        	return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+        	return false;
+        }
         Student student = (Student) o;
-        return score == student.score &&
-                Objects.equals(name, student.name);
+        return score == student.score 
+                && Objects.equals(name, student.name);
     }
 
     @Override

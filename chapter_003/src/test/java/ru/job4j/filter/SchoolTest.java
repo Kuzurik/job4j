@@ -1,4 +1,4 @@
-package filter;
+package ru.job4j.filter;
 
 import org.junit.Test;
 import ru.job4j.filter.School;
@@ -20,7 +20,7 @@ public class SchoolTest {
                 new Student(50),
                 new Student(80)
         );
-        List<Student> result = school.collect(studentList,score -> score.getScore() >= 70 && score.getScore() < 100);
+        List<Student> result = school.collect(studentList, score -> score.getScore() >= 70 && score.getScore() < 100);
         List<Student> expected = List.of(
                 new Student(70),
                 new Student(80)
@@ -38,7 +38,7 @@ public class SchoolTest {
                 new Student(80),
                 new Student(60)
         );
-        List<Student> result = school.collect(studentList,score -> score.getScore() >= 0 && score.getScore() <= 50);
+        List<Student> result = school.collect(studentList, score -> score.getScore() >= 0 && score.getScore() <= 50);
         List<Student> expected = List.of(
                 new Student(30),
                 new Student(50)

@@ -1,6 +1,5 @@
 package ru.job4j.groupings;
 
-import java.util.Objects;
 
 public class Holder {
     private String unit, name;

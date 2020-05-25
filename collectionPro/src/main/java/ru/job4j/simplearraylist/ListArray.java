@@ -1,17 +1,17 @@
-package simpleArrayList;
+package ru.job4j.simplearraylist;
 
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ListArray<E> implements Iterable<E>{
+public class ListArray<E> implements Iterable<E> {
     private Object[] container;
     private final static int DEFAULT_CAPACITY = 10;
     private int position = 0;
     private int modCount = 0;
 
-    public ListArray(){
+    public ListArray() {
         this.container = new Object[DEFAULT_CAPACITY];
     }
 
@@ -34,7 +34,7 @@ public class ListArray<E> implements Iterable<E>{
         if (index > this.container.length) {
             throw new IndexOutOfBoundsException();
         }
-        System.arraycopy(this.container, index + 1, this.container, index, this.container.length - 1 - index );
+        System.arraycopy(this.container, index + 1, this.container, index, this.container.length - 1 - index);
         position--;
         modCount++;
     }

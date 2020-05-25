@@ -1,4 +1,4 @@
-package ru.job4j.convertingToList;
+package ru.job4j.convertingtolist;
 
 import java.util.Arrays;
 import java.util.List;

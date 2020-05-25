@@ -1,9 +1,10 @@
-package addressList;
+package ru.job4j.addresslist;
 
 import org.junit.Test;
-import ru.job4j.addressList.Address;
-import ru.job4j.addressList.Profile;
-import ru.job4j.addressList.Profiles;
+
+import ru.job4j.addresslist.Address;
+import ru.job4j.addresslist.Profile;
+import ru.job4j.addresslist.Profiles;
 
 import java.util.List;
 import static org.hamcrest.core.Is.is;

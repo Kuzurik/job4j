@@ -1,7 +1,9 @@
-package hashTable;
+package ru.job4j.hashtable;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ru.job4j.hashtable.SimpleHashTable;
 
 import java.util.Iterator;
 
@@ -14,12 +16,12 @@ public class SimpleHashTableTest {
 
     @Before
     public void before() {
-        map.insert("first","1");
-        map.insert("second","2");
-        map.insert("third","3");
-        map.insert("fourth","4");
-        map.insert("fifth","5");
-        map.insert("sixth","6");
+        map.insert("first", "1");
+        map.insert("second", "2");
+        map.insert("third", "3");
+        map.insert("fourth", "4");
+        map.insert("fifth", "5");
+        map.insert("sixth", "6");
     }
 
     @Test
@@ -37,14 +39,14 @@ public class SimpleHashTableTest {
     @Test
     public void whenIterator() {
         Iterator<String> it = map.iterator();
-        assertThat(it.hasNext(),is(true));
-        assertThat(it.hasNext(),is(true));
-        assertThat(it.next(),is("6"));
-        assertThat(it.next(),is("3"));
-        assertThat(it.next(),is("5"));
-        assertThat(it.next(),is("4"));
-        assertThat(it.next(),is("1"));
-        assertThat(it.next(),is("2"));
-        assertThat(it.hasNext(),is(false));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("6"));
+        assertThat(it.next(), is("3"));
+        assertThat(it.next(), is("5"));
+        assertThat(it.next(), is("4"));
+        assertThat(it.next(), is("1"));
+        assertThat(it.next(), is("2"));
+        assertThat(it.hasNext(), is(false));
     }
 }

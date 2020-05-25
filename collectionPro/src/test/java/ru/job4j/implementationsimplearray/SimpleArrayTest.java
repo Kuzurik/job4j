@@ -1,7 +1,8 @@
-package implementationSimpleArray;
+package ru.job4j.implementationsimplearray;
 
-import generic.implementationSimpleArray.SimpleArray;
 import org.junit.Test;
+
+import ru.job4j.generics.SimpleArray;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

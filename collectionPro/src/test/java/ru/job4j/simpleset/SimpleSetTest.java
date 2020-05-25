@@ -1,7 +1,9 @@
-package simpleSet;
+package ru.job4j.simpleset;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ru.job4j.simpleset.SimpleSet;
 
 import java.util.Iterator;
 

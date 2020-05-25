@@ -1,4 +1,4 @@
-package readConfig;
+package ru.job4j.readconfig;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,7 +15,7 @@ public class Config {
     }
 
     public void load() {
-        try (BufferedReader read = new BufferedReader(new FileReader(this.path))){
+        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             String line;
             while ((line = read.readLine()) != null) {
                 line = line.split("#")[0];
@@ -36,7 +36,7 @@ public class Config {
     @Override
     public String toString() {
         StringJoiner out = new StringJoiner(System.lineSeparator());
-        try (BufferedReader read = new BufferedReader(new FileReader(this.path))){
+        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines().forEach(out::add);
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,6 +45,6 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Config("./chapter_002_input-output/src/main/java/readConfig/app.properties"));
+        System.out.println(new Config("./io/src/main/java/ru/job4j/readconfig/app.properties"));
     }
 }
