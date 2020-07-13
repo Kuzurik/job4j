@@ -24,7 +24,7 @@ public class SearchFiles implements FileVisitor<Path>  {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-        if (file.toFile().getName().endsWith(ext)) {
+        if (!file.toFile().getName().endsWith(ext)) {
             paths.add(file);
         }
         return CONTINUE;

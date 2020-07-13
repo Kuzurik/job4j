@@ -14,9 +14,14 @@ public class Search {
 		search(startDir, "html").forEach(System.out::println);
 	}
 	
-	public static List<Path> search(Path root, String ext) throws IOException {
+	public static List<Path> search(Path root, String ext)  {
 		SearchFiles searcher = new SearchFiles(ext);
-		Files.walkFileTree(root, searcher);
+		try {
+			Files.walkFileTree(root, searcher);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return searcher.getPaths();
 	}
 
