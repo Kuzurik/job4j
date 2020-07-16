@@ -38,10 +38,10 @@ public class Zip {
      * @param args list of arguments
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Zip zip = new Zip();
         ArgZip argZip = new ArgZip(args);
-        List<Path> paths = Search.search(Path.of(argZip.directory()), argZip.exclude());
+        List<Path> paths = Search.search(Path.of(argZip.directory()), t -> !t.toFile().getName().endsWith(argZip.exclude()));
         zip.packFiles(paths, new File(argZip.output()));
     }
 
