@@ -16,6 +16,13 @@ public class StartChat {
     private final static String STOP = "stop";
     private final static String CONTINUE = "continue";
     private final static String EXIT = "exit";
+    private final String answPath;
+    private final String logPath;
+
+    public StartChat(String answPath, String logPath) {
+        this.answPath = answPath;
+        this.logPath = logPath;
+    }
 
     /**
      * Save answers to list
@@ -23,7 +30,7 @@ public class StartChat {
      */
 
     public String answer() {
-        List<String> answers = GetAnswers.answers("io/src/main/resources/questions.txt");
+        List<String> answers = GetAnswers.answers(this.answPath);
         return answers.get(new Random().nextInt(answers.size()));
     }
 
@@ -53,13 +60,15 @@ public class StartChat {
             }
 
         } while (!EXIT.equals(userMsg));
-        WriteLog.writeLog(log, "io/src/main/resources/log.txt");
+        WriteLog.writeLog(log, this.logPath);
 
 
     }
 
 
     public static void main(String[] args) {
-        new StartChat().start();
+
+        new StartChat("io/src/main/resources/questions.txt",
+                "io/src/main/resources/log.txt").start();
     }
 }
