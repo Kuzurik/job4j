@@ -10,7 +10,7 @@ import java.net.Socket;
 public class EchoServer {
     public static void main(String[] args) throws IOException {
         try (ServerSocket server = new ServerSocket(9000)) {
-            while (true) {
+            while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
@@ -19,10 +19,13 @@ public class EchoServer {
                     if (str.startsWith("GET") && str.contains("stop")) {
                         server.close();
                     }
-                    while (!(str = in.readLine()).isEmpty()) {
-                        System.out.println(str);
-                    }
-                    out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
+                   if (!server.isClosed()){
+                       while (!(str = in.readLine()).isEmpty()) {
+                           System.out.println(str);
+                       }
+                       out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
+                   }
+
                 }
             }
         }
