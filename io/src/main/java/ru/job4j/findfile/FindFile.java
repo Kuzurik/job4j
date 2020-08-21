@@ -23,7 +23,7 @@ public class FindFile {
         try (PrintWriter out = new PrintWriter(
                 new BufferedOutputStream(new FileOutputStream(file)))){
             for (Path value : paths) {
-                    out.println(String.valueOf(value));
+                    out.println(value);
             }
 
         } catch (Exception e) {
@@ -32,17 +32,13 @@ public class FindFile {
     }
 
     public void start(String[] args) throws IOException {
-        ArgFind argFind =new ArgFind(args);
-        if (argFind.getMatch().equals("-f")) {
-            List<Path> paths = this.listFiles(Path.of(argFind.directory()),
-                    p -> p.toFile().getName().equals(argFind.fileName()));
-            this.writeFile(paths, argFind.output());
+        ArgFind argFind = new ArgFind(args);
+        if (argFind.valid()){
+                List<Path> paths = this.listFiles(Path.of(argFind.directory()),
+                        new SelectPredicate(argFind, argFind.getMatch()).select());
+                this.writeFile(paths, argFind.output());
         }
-        if (argFind.getMatch().equals("-m")) {
-            List<Path> paths = this.listFiles(Path.of(argFind.directory()),
-                    p -> p.toFile().getName().endsWith(argFind.fileName()));
-            this.writeFile(paths, argFind.output());
-        }
+
     }
 
     public static void main(String[] args) throws IOException {

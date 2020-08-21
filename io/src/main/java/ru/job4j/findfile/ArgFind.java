@@ -9,23 +9,21 @@ public class ArgFind {
 
     public boolean valid() {
         if (this.args.length != 7) {
-            throw new IllegalArgumentException("Illegal arguments");
+            throw new IllegalArgumentException("Illegal arguments " +
+                    "-d start Directory " +
+                    "-n file name or mask" +
+                    "-m find mask -f filename" +
+                    "-o output file ");
         }
         return true;
     }
 
     public String directory() {
-        if (valid() && this.args[0].equals("-d")) {
-            return this.args[1];
-        }
-        return "";
+        return this.args[1];
     }
 
     public String fileName() {
-        if (valid() && this.args[2].equals("-n")) {
-            return this.args[3];
-        }
-        return "";
+        return this.args[3];
     }
 
     public String getMatch() {
@@ -33,9 +31,6 @@ public class ArgFind {
     }
 
     public String output() {
-        if (valid() && this.args[5].equals("-o")) {
-            return args[6];
-        }
-        return "";
+        return args[6];
     }
 }
