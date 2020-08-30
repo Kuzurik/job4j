@@ -21,6 +21,7 @@
         <module>collectionPro</module>
         <module>io</module>
         <module>puzzle</module>
+        <module>database</module>
     </modules>
 
     <build>
