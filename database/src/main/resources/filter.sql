@@ -13,19 +13,19 @@ CREATE TABLE product(
 );
 
 insert into product (name, type_id, expired_date, price, count) values ('chedr', 1, '2020-08-31 06:30:00',200, 12);
-insert into product (name, type_id, expired_date, price, count) values ('pork', 2, '2020-08-31 06:30:00', 100, 8);
-insert into product (name, type_id, expired_date, price, count) values ('russian', 1, '2020-08-31 06:30:00',150, 5);
-insert into product (name, type_id, expired_date, price, count) values ('belact', 3, '2020-08-31 06:30:00',120, 13);
-insert into product (name, type_id, expired_date, price, count) values ('beef', 2, '2020-08-31 06:30:00', 130, 2);
-insert into product (name, type_id, expired_date, price, count) values ('chiken', 2, '2020-08-31 06:30:00', 90, 6);
-insert into product (name, type_id, expired_date, price, count) values ('amadeus', 1, '2020-08-31 06:30:00', 110, 8);
+insert into product (name, type_id, expired_date, price, count) values ('pork', 2, '2020-09-31 06:30:00', 100, 8);
+insert into product (name, type_id, expired_date, price, count) values ('russian', 1, '2020-10-31 06:30:00',150, 5);
+insert into product (name, type_id, expired_date, price, count) values ('belact', 3, '2020-11-31 06:30:00',120, 13);
+insert into product (name, type_id, expired_date, price, count) values ('beef', 2, '2020-09-31 06:30:00', 130, 2);
+insert into product (name, type_id, expired_date, price, count) values ('chiken', 2, '2020-12-31 06:30:00', 90, 6);
+insert into product (name, type_id, expired_date, price, count) values ('amadeus', 1, '2020-0-31 06:30:00', 110, 8);
 insert into product (name, type_id, expired_date, price, count) values ('blue', 1, '2020-08-31 06:30:00',190, 9);
 
 
 select * from product as p where p.type_id = 1;
 select * from product as p where p.name like 'beef';
 select * from product as p
-where p.expired_date between '2020-08-01 00:00:00' and '2020-08-31 23:59:59';
+where p.expired_date between now() and now() + interval '1 month';
 select * from product as p
 where p.price = (Select max (price) from product);
 select count(*) from product as p
