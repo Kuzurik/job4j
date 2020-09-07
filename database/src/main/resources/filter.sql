@@ -28,10 +28,8 @@ select * from product as p
 where p.expired_date between now() and now() + interval '1 month';
 select * from product as p
 where p.price = (Select max (price) from product);
-select count(*) from product as p
-where p.type_id = 1;
-select * from product as p
-where p.type_id = 1 or p.type_id = 3;
+select t.name, count(p.id) from product p join type t on p.type_id = t.id group by t.name;
+select p.name, t.name from product p join type t ON p.type_id = t.id where t.name in ('chees', 'milk');
 select * from product as p
 where p.count < 10;
 select u.name, c.name from product as u
