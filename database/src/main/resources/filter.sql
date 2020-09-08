@@ -30,7 +30,5 @@ select * from product as p
 where p.price = (Select max (price) from product);
 select t.name, count(p.id) from product p join type t on p.type_id = t.id group by t.name;
 select p.name, t.name from product p join type t ON p.type_id = t.id where t.name in ('chees', 'milk');
-select * from product as p
-where p.count < 10;
-select u.name, c.name from product as u
-inner join type as c on u.type_id = c.id;
+select t.name from product p join type t on p.type_id = t.id group by t.name having count(p.id) < 10;
+select p.name, t.name from product as p inner join type as t on p.type_id = t.id;
