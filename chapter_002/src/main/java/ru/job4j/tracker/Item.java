@@ -1,5 +1,4 @@
 package ru.job4j.tracker;
-
 import java.util.Objects;
 
     public class Item {
@@ -8,12 +7,16 @@ import java.util.Objects;
         private String decs;
         private long time;
         
-        public Item(String name, String decs, long time) {
+        public Item(String id, String name, String decs, long time) {
+            this.id = id;
             this.name = name;
             this.decs = decs;
             this.time = time;
         }
-        
+
+        public Item(String id, String desc, long currentTimeMillis) {
+        }
+
         public String getId() {
             return this.id;
         }
@@ -61,4 +64,14 @@ import java.util.Objects;
         public int hashCode() {
             return Objects.hash(id, name, decs, time);
     }
-}
+
+        @Override
+        public String toString() {
+            return "Item{" +
+                    "id='" + id + '\'' +
+                    ", name='" + name + '\'' +
+                    ", decs='" + decs + '\'' +
+                    ", time=" + time +
+                    '}';
+        }
+    }

@@ -1,7 +1,10 @@
 package ru.job4j.tracker;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Consumer;
 
 /**
@@ -13,14 +16,14 @@ import java.util.function.Consumer;
 
 public class MenuTracker {
     
-    private Input input;
-    private Tracker tracker;
+    private final Input input;
+    private final SqlTracker sqlTracker;
     private final Consumer<String> output;
-    private List<UserAction> actions = new ArrayList<>();
+    private final List<UserAction> actions = new ArrayList<>();
 
-    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
+    public MenuTracker(Input input, SqlTracker sqlTracker, Consumer<String> output) {
         this.input = input;
-        this.tracker = tracker;
+        this.sqlTracker = sqlTracker;
         this.output = output;
     }
 
@@ -30,7 +33,7 @@ public class MenuTracker {
 
     public void fillActions(StartUI ui) {
         this.actions.add(0, new AddItem(0, "Add the new item"));
-        this.actions.add(1, new ShowAll(1,  "Show all items"));
+        this.actions.add(1, new ShowAll(1, "Show all items"));
         this.actions.add(2, new EditItem(2, "Edit item"));
         this.actions.add(3, new DeleteItem(3, "Delete item"));
         this.actions.add(4, new FindItemById(4, "Find item by id"));
@@ -43,8 +46,8 @@ public class MenuTracker {
      * @param key
      */
 
-    public void select(int key) {
-        this.actions.get(key).execute(this.input, this.tracker, this.output);
+    public void select(int key) throws SQLException {
+        this.actions.get(key).execute(this.input, this.sqlTracker, this.output);
     }
 
     /**
@@ -60,50 +63,50 @@ public class MenuTracker {
     }
     
 
-    private class AddItem extends BaseAction {
+    private static class AddItem extends BaseAction {
 
         protected AddItem(int key, String name) {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker, Consumer<String> output) {
+        public void execute(Input input, SqlTracker sqlTracker, Consumer<String> output) throws SQLException {
             output.accept("------------ Добавление новой заявки --------------");
             String name = input.ask("Введите имя заявки : ");
             String desc = input.ask("Введите комментарий : ");
-            Item item = new Item(name, desc, System.currentTimeMillis());
-            tracker.add(item);
+            Item item = new Item(String.valueOf(System.currentTimeMillis() + new Random().nextInt()),name, desc, System.currentTimeMillis());
+            sqlTracker.add(item);
             output.accept(String.format("---%s---%s---%s", item.getId(), item.getName(), item.getDecs()));
         }
 
     }
 
-    private class ShowAll extends BaseAction {
+    private static class ShowAll extends BaseAction {
 
         protected ShowAll(int key, String name) {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker, Consumer<String> output) {
-            List<Item> list = tracker.findAll();
+        public void execute(Input input, SqlTracker sqlTracker, Consumer<String> output) throws SQLException {
+            List<Item> list = sqlTracker.findAll();
             for (Item value : list) {
                 output.accept(String.format("---%s---%s---%s", value.getId(), value.getName(), value.getDecs()));
             }
         }
     }
 
-    private class EditItem extends BaseAction {
+    private static class EditItem extends BaseAction {
 
         protected EditItem(int key, String name) {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker, Consumer<String> output) {
+        public void execute(Input input, SqlTracker sqlTracker, Consumer<String> output) throws SQLException {
             output.accept("-----------------Редактируем заявку-----------------");
             String id = input.ask("Введите id заявки : ");
             String name = input.ask("Введите новое имя : ");
             String desc = input.ask("Введите новый комментарий : ");
-            Item item = new Item(name, desc, System.currentTimeMillis());
-            boolean value = tracker.replace(id, item);
+            Item item = new Item(String.valueOf(System.currentTimeMillis() + new Random().nextInt()), name, desc, System.currentTimeMillis());
+            boolean value = sqlTracker.replace(id, item);
             if (!value) {
                 output.accept("Ничего не найдено!");
             } else {
@@ -112,17 +115,17 @@ public class MenuTracker {
         }
     }
 
-    private class DeleteItem extends BaseAction {
+    private static class DeleteItem extends BaseAction {
 
         protected DeleteItem(int key, String name) {
             super(key, name);
         }
 
 
-        public void execute(Input input, Tracker tracker, Consumer<String> output) {
+        public void execute(Input input, SqlTracker sqlTracker, Consumer<String> output) throws SQLException {
            output.accept("---------------Удаляем заявку----------------");
             String id = input.ask("Введите id заявки : ");
-            boolean value = tracker.delete(id);
+            boolean value = sqlTracker.delete(id);
             if (!value) {
                 output.accept("Ничего не найдено!");
             } else {
@@ -131,16 +134,16 @@ public class MenuTracker {
         }
     }
 
-    private class FindItemById extends BaseAction {
+    private static class FindItemById extends BaseAction {
 
         protected FindItemById(int key, String name) {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker, Consumer<String> output) {
+        public void execute(Input input, SqlTracker sqlTracker, Consumer<String> output) throws SQLException {
             output.accept("---------------Ищем по id-------------");
             String id = input.ask("Введите id : ");
-            Item value = tracker.findById(id);
+            Item value = sqlTracker.findById(id);
             if (value.equals(null)) {
                 output.accept("Ничего не найдено !");
             } else {
@@ -149,16 +152,16 @@ public class MenuTracker {
         }
     }
 
-    private class FindItemByName extends BaseAction {
+    private static class FindItemByName extends BaseAction {
 
         protected FindItemByName(int key, String name) {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker, Consumer<String> output) {
+        public void execute(Input input, SqlTracker sqlTracker, Consumer<String> output) throws SQLException {
             output.accept("---------------Ищем по имени-------------");
             String name = input.ask("Введите имя : ");
-            List<Item> list = tracker.findByName(name);
+            List<Item> list = sqlTracker.findByName(name);
             if (list.size() == 0) {
                 output.accept("Ничего не найдено !");
             } else {
@@ -169,7 +172,7 @@ public class MenuTracker {
         }
     }
 
-    private class Exit extends BaseAction {
+    private static class Exit extends BaseAction {
         private final StartUI ui;
 
         protected Exit(StartUI ui, int key, String name) {
@@ -178,7 +181,7 @@ public class MenuTracker {
         }
 
 
-        public void execute(Input input, Tracker tracker, Consumer<String> output) {
+        public void execute(Input input, SqlTracker sqlTracker, Consumer<String> output) {
            ui.setExit(false);
         }
     }
