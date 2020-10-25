@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.actions.*;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,55 +16,50 @@ import java.util.function.Consumer;
  */
 
 public class StartUI {
-    private final Input input;
-    private final SqlTracker sqlTracker;
-    private final Consumer<String> output;
     private boolean exit = true;
 
-    public StartUI(Input input, SqlTracker sqlTracker, Consumer<String> output) {
-        this.input = input;
-        this.sqlTracker = sqlTracker;
-        this.output = output;
+    public void init(Input input, Store tracker, UserAction[] actions, Consumer<String> output) throws SQLException {
+     List<Integer> range = new ArrayList<>();
+     for(int i = 0; i != actions.length; i++) {
+         range.add(i);
+     }
+        do {
+            this.showMenu(actions);
+            int select = input.ask("select: ", range);
+            UserAction action = actions[select];
+            action.execute(input, tracker, output);
+        } while (exit);
     }
 
-
-
-    public void init() throws SQLException {
-        MenuTracker menu = new MenuTracker(this.input, this.sqlTracker, this.output);
-        List<Integer> range = new ArrayList<>();
-        menu.fillActions(this);
-        for (int i = 0; i != menu.getActionsLength(); i++) {
-            range.add(i);
+    public void showMenu(UserAction[] actions) {
+        for (UserAction value : actions) {
+            System.out.println(value.info());
         }
-        do {
-           menu.show();
-            menu.select(input.ask("select: ", range));
-           } while (exit);
-
     }
 
     public void setExit(boolean exit) {
         this.exit = exit;
     }
 
-
-
-    public static void main(String[] args) throws SQLException {
-        SqlTracker sqlTracker = new SqlTracker();
-        sqlTracker.init();
-        new StartUI(new ValidateInput(new ConsoleInput()), sqlTracker, System.out::println).init();
-        sqlTracker.close();
-      /*  Input validate = new ValidateInput(
+    public static void main(String[] args) {
+        Input validate = new ValidateInput(
                 new ConsoleInput()
         );
         try (Store tracker = new SqlTracker()) {
+            StartUI ui = new StartUI();
             tracker.init();
             UserAction[] actions = {
-                    new CreateAction()
+                    new AddItem(0, "Add the new item"),
+                    new ShowAll(1, "Show all items"),
+                    new EditItem(2, "Edit item"),
+                    new DeleteItem(3, "Delete item"),
+                    new FindItemById(4, "Find item by id"),
+                    new FindItemByName(5, "Find item by name"),
+                    new Exit(ui, 6, "Exit program")
             };
-            new StartUI().init(validate, tracker, actions);
+            ui.init(validate, tracker, actions, System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
-    } 
+        }
+    }
 }

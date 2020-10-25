@@ -14,9 +14,6 @@ import java.util.Objects;
             this.time = time;
         }
 
-        public Item(String id, String desc, long currentTimeMillis) {
-        }
-
         public String getId() {
             return this.id;
         }
