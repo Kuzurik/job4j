@@ -9,6 +9,14 @@ import java.util.Properties;
 public class SqlTracker implements Store {
     private Connection cn;
 
+   public SqlTracker(Connection cn) {
+       this.cn = cn;
+   }
+
+    public SqlTracker() {
+
+    }
+
     public void init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
@@ -117,7 +125,7 @@ public class SqlTracker implements Store {
     }
 
     @Override
-    public Item findById(String id){
+    public Item findById(String id) {
         Item result = null;
         try (PreparedStatement st = cn.prepareStatement("select * from item as i where i.id in (?)")) {
             st.setString(1, id);

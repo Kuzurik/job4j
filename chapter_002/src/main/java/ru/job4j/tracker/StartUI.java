@@ -20,7 +20,7 @@ public class StartUI {
 
     public void init(Input input, Store tracker, UserAction[] actions, Consumer<String> output) throws SQLException {
      List<Integer> range = new ArrayList<>();
-     for(int i = 0; i != actions.length; i++) {
+     for (int i = 0; i != actions.length; i++) {
          range.add(i);
      }
         do {

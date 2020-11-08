@@ -64,11 +64,11 @@ import java.util.Objects;
 
         @Override
         public String toString() {
-            return "Item{" +
-                    "id='" + id + '\'' +
-                    ", name='" + name + '\'' +
-                    ", decs='" + decs + '\'' +
-                    ", time=" + time +
-                    '}';
+            return "Item{"
+                    + "id='" + id + '\''
+                    + ", name='" + name + '\''
+                    + ", decs='" + decs + '\''
+                    + ", time=" + time
+                    + '}';
         }
     }

@@ -15,7 +15,7 @@ public class AddItem extends BaseAction {
         output.accept("------------ Добавление новой заявки --------------");
         String name = input.ask("Введите имя заявки : ");
         String desc = input.ask("Введите комментарий : ");
-        Item item = new Item(String.valueOf(System.currentTimeMillis() + new Random().nextInt()),name, desc, System.currentTimeMillis());
+        Item item = new Item(String.valueOf(System.currentTimeMillis() + new Random().nextInt()), name, desc, System.currentTimeMillis());
         sqlTracker.add(item);
         output.accept(String.format("---%s---%s---%s", item.getId(), item.getName(), item.getDecs()));
     }
