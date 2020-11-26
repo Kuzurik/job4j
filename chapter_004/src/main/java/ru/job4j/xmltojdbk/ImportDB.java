@@ -1,4 +1,4 @@
-package ru.job4j.XmlToJdbk;
+package ru.job4j.xmltojdbk;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -58,7 +58,7 @@ public class ImportDB {
        String name;
        String eMail;
 
-        public User (String name, String eMail) {
+        public User(String name, String eMail) {
             this.name = name;
             this.eMail = eMail;
         }

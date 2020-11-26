@@ -20,7 +20,9 @@ public class ChatBot {
                     String answer = "";
                     String exit = "Exit";
                     String hello = "Hello";
-                    while (!(str = in.readLine()).isEmpty()) {
+                    str = in.readLine();
+                    while (!(str.isEmpty())) {
+                        str = in.readLine();
                         System.out.println(str);
                         if (str.indexOf("msg=") > 0) {
                             answer = str.split("msg=")[1];

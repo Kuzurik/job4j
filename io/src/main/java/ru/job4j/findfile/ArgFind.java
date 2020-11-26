@@ -9,11 +9,11 @@ public class ArgFind {
 
     public boolean valid() {
         if (this.args.length != 7) {
-            throw new IllegalArgumentException("Illegal arguments " +
-                    "-d start Directory " +
-                    "-n file name or mask" +
-                    "-m find mask -f filename" +
-                    "-o output file ");
+            throw new IllegalArgumentException("Illegal arguments "
+                    + "-d start Directory "
+                    + "-n file name or mask"
+                    + "-m find mask -f filename"
+                    + "-o output file ");
         }
         return true;
     }

@@ -13,7 +13,7 @@ import java.util.function.Predicate;
 
 public class FindFile {
 
-    public List<Path> listFiles(Path dir, Predicate<Path> predicate ) throws IOException {
+    public List<Path> listFiles(Path dir, Predicate<Path> predicate) throws IOException {
         SearchFiles search = new SearchFiles(predicate);
         Files.walkFileTree(dir, search);
         return search.getPaths();
@@ -21,7 +21,7 @@ public class FindFile {
 
     public void writeFile(List<Path> paths, String file) {
         try (PrintWriter out = new PrintWriter(
-                new BufferedOutputStream(new FileOutputStream(file)))){
+                new BufferedOutputStream(new FileOutputStream(file)))) {
             for (Path value : paths) {
                     out.println(value);
             }
@@ -33,7 +33,7 @@ public class FindFile {
 
     public void start(String[] args) throws IOException {
         ArgFind argFind = new ArgFind(args);
-        if (argFind.valid()){
+        if (argFind.valid()) {
                 List<Path> paths = this.listFiles(Path.of(argFind.directory()),
                         new SelectPredicate(argFind, argFind.getMatch()).select());
                 this.writeFile(paths, argFind.output());

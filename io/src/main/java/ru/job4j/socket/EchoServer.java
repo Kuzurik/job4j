@@ -19,8 +19,9 @@ public class EchoServer {
                     if (str.startsWith("GET") && str.contains("stop")) {
                         server.close();
                     }
-                   if (!server.isClosed()){
-                       while (!(str = in.readLine()).isEmpty()) {
+                   if (!server.isClosed()) {
+                       while (!(str.isEmpty())) {
+                           str = in.readLine();
                            System.out.println(str);
                        }
                        out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
