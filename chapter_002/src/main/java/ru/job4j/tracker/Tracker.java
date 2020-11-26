@@ -2,9 +2,7 @@ package ru.job4j.tracker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Arrays;
 
-import static java.util.Arrays.copyOf;
 
 /**
  * The class generates an id, adds items, removes items,
@@ -16,7 +14,7 @@ import static java.util.Arrays.copyOf;
  */
 public class Tracker {
 
-    private List<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     private static final Random RND = new Random();
 
 
@@ -40,8 +38,8 @@ public class Tracker {
      * @return String id.
      */
 
-    private String generatedId() {
-        return String.valueOf(System.currentTimeMillis() + RND.nextInt());
+    private int generatedId() {
+        return RND.nextInt();
     }
 
     /**
@@ -51,12 +49,12 @@ public class Tracker {
      * @return true or false.
      */
 
-    public boolean replace(String id, Item item) {
+    public boolean replace(int id, Item item) {
         boolean result = false;
        int index = 0;
             for (Item value : this.items) {
-                if (value != null && value.getId().equals(id)) {
-                    String id1 = value.getId();
+                if (value != null && value.getId() == id) {
+                    int id1 = value.getId();
                     this.items.set(index, item);
                     this.items.get(index).setId(id1);
                     result = true;
@@ -73,18 +71,16 @@ public class Tracker {
      * @return true or false.
      */
 
-    public boolean delete(String id) {
-            boolean result = false;
+    public boolean delete(int id) {
             int index = 0;
                 for (Item value : this.items) {
-                    if (value != null && value.getId().equals(id)) {
+                    if (value != null && value.getId() == id) {
                         this.items.remove(index);
-                        result = true;
-                        break;
+                        return  true;
                     }
                     index++;
                 }        
-            return result;
+            return false;
     }
 
     /**
@@ -119,10 +115,10 @@ public class Tracker {
      * @return found item.
      */
 
-    public Item findById(String id) {
+    public Item findById(int id) {
        Item result = null;
         for (Item value : items) {
-            if (value != null && value.getId().equals(id)) {
+            if (value != null && value.getId() == id) {
                 result = value;
                 break;
             }

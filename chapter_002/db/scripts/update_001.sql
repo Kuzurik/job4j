@@ -1,5 +1,5 @@
 CREATE TABLE item(
-   id varchar(200),
+   id serial primary key not null,
    name varchar(200),
    description varchar(200),
    time TIMESTAMP

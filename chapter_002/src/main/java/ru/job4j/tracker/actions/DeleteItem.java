@@ -16,7 +16,7 @@ public class DeleteItem extends BaseAction {
 
     public void execute(Input input, Store sqlTracker, Consumer<String> output) throws SQLException {
         output.accept("---------------Удаляем заявку----------------");
-        String id = input.ask("Введите id заявки : ");
+        int id = Integer.parseInt(input.ask("Введите id заявки : "));
         boolean value = sqlTracker.delete(id);
         if (!value) {
             output.accept("Ничего не найдено!");

@@ -14,10 +14,10 @@ public class EditItem extends BaseAction {
 
     public void execute(Input input, Store sqlTracker, Consumer<String> output) throws SQLException {
         output.accept("-----------------Редактируем заявку-----------------");
-        String id = input.ask("Введите id заявки : ");
+        int id = Integer.parseInt(input.ask("Введите id заявки : "));
         String name = input.ask("Введите новое имя : ");
         String desc = input.ask("Введите новый комментарий : ");
-        Item item = new Item(String.valueOf(System.currentTimeMillis() + new Random().nextInt()), name, desc, System.currentTimeMillis());
+        Item item = new Item(new Random().nextInt(), name, desc, System.currentTimeMillis());
         boolean value = sqlTracker.replace(id, item);
         if (!value) {
             output.accept("Ничего не найдено!");

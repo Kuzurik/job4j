@@ -13,7 +13,7 @@ public class FindItemById extends BaseAction {
 
     public void execute(Input input, Store sqlTracker, Consumer<String> output) throws SQLException {
         output.accept("---------------Ищем по id-------------");
-        String id = input.ask("Введите id : ");
+        int id = Integer.parseInt(input.ask("Введите id : "));
         Item value = sqlTracker.findById(id);
         output.accept(String.format("---%s---%s---%s", value.getId(), value.getName(), value.getDecs()));
     }

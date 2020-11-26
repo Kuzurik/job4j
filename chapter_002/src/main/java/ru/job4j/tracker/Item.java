@@ -2,22 +2,22 @@ package ru.job4j.tracker;
 import java.util.Objects;
 
     public class Item {
-        private String id;
+        private int id;
         private String name;
         private String decs;
         private long time;
         
-        public Item(String id, String name, String decs, long time) {
+        public Item(int id, String name, String decs, long time) {
             this.id = id;
             this.name = name;
             this.decs = decs;
             this.time = time;
         }
 
-        public String getId() {
+        public int getId() {
             return this.id;
         }
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
         }
         
