@@ -3,8 +3,8 @@ package ru.job4j.quartz;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.util.Properties;
 
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
@@ -12,8 +12,8 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 public class AlertRabbit {
     public static void main(String[] args) {
-       AlertRabbit cfg = new AlertRabbit();
-        int interval = cfg.readCfg("./chapter_004/src/main/resources/rabbit.properties");
+        AlertRabbit alert = new AlertRabbit();
+        int interval = alert.init();
         try {
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             scheduler.start();
@@ -31,19 +31,15 @@ public class AlertRabbit {
         }
     }
 
-    public int readCfg(String path) {
-        int result = 0;
-        try (BufferedReader in = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = in.readLine()) != null) {
-                String[] parts = line.split("=");
-                result = Integer.parseInt(parts[1]);
-            }
-
+    public int init() {
+        int result;
+        try (InputStream in = AlertRabbit.class.getClassLoader().getResourceAsStream("rabbit.properties")) {
+            Properties config = new Properties();
+            config.load(in);
+            result = Integer.parseInt(config.getProperty("rabbit.interval"));
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException();
         }
-
         return result;
     }
 
