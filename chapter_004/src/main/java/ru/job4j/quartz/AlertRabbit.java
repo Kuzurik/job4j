@@ -40,7 +40,7 @@ public class AlertRabbit {
                 result = Integer.parseInt(parts[1]);
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
