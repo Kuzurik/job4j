@@ -30,13 +30,9 @@ insert into person(id, name, company_id) values (8, 'Petr', null);
 insert into person(id, name, company_id) values (9, 'Vladimir', null);
 insert into person(id, name, company_id) values (10, 'Kirill', 5);
 
-select p.name from person as p
-full outer join company c on p.company_id = c.id
-where company_id != 5 or company_id is null;
-
 select p.name, c.name from person as p
 left join company c on p.company_id = c.id
-where c.name is not null;
+where company_id != 5 or company_id is null;
 
 select c.name, count(p.id) as num
 from company c left join person p on c.id = p.company_id
