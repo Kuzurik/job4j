@@ -31,6 +31,7 @@ public class DeveloperReport implements Report {
     @Override
     public String generate(Predicate<Employee> filter) {
         String lS = System.lineSeparator();
+        ChangeFormat change = new DateFormat();
         StringBuilder text = new StringBuilder();
         text.append("<!DOCTYPE html>").append(lS)
                 .append("<html>").append(lS)
@@ -49,8 +50,8 @@ public class DeveloperReport implements Report {
         for(Employee employee : store.findBy(filter)) {
             text.append("<tr>").append(lS)
                     .append(String.format("<td>%s</td>", employee.getName()))
-                    .append(String.format("<td>%s</td>", DateFormat.date(employee.getHired())))
-                    .append(String.format("<td>%s</td>", DateFormat.date(employee.getFired())))
+                    .append(String.format("<td>%s</td>", change.date(employee.getHired())))
+                    .append(String.format("<td>%s</td>", change.date(employee.getFired())))
                     .append(String.format("<td>%s</td>", employee.getSalary()))
                     .append("</tr>").append(lS);
         }

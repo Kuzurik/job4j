@@ -7,13 +7,13 @@ package ru.job4j.srp;
  * @since 0.1
  */
 
-public class ConvertSalary {
+public class ConvertToDollar implements Converter{
     /**
      * The method get rub and convert to dollar.
      * @param rub
      * @return
      */
-    public static String convert(double rub) {
+    public String convert(double rub) {
         return String.format("%s$", rub / 76);
     }
 }

@@ -10,13 +10,13 @@ import java.util.Calendar;
  * @since 0.1
  */
 
-public class DateFormat {
+public class DateFormat implements ChangeFormat{
     /**
      * this method convert date.
      * @param cel
      * @return
      */
-    public static String date(Calendar cel) {
+    public String date(Calendar cel) {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cel.getTime());
     }
 }

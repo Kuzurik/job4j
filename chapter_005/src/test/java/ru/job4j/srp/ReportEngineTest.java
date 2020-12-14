@@ -44,6 +44,7 @@ public class ReportEngineTest {
     public void whenHtmlReport() {
         String lS = System.lineSeparator();
         MemStore store = new MemStore();
+        ChangeFormat change = new DateFormat();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         Employee worker1 = new Employee("Alex", now, now, 300);
@@ -70,8 +71,8 @@ public class ReportEngineTest {
         for(Employee employee : store.findBy(em -> true)) {
             expect.append("<tr>").append(lS)
                     .append(String.format("<td>%s</td>", employee.getName()))
-                    .append(String.format("<td>%s</td>", DateFormat.date(employee.getHired())))
-                    .append(String.format("<td>%s</td>", DateFormat.date(employee.getFired())))
+                    .append(String.format("<td>%s</td>", change.date(employee.getHired())))
+                    .append(String.format("<td>%s</td>", change.date(employee.getFired())))
                     .append(String.format("<td>%s</td>", employee.getSalary()))
                     .append("</tr>").append(lS);
         }
