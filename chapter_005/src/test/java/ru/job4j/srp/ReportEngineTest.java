@@ -42,9 +42,9 @@ public class ReportEngineTest {
 
     @Test
     public void whenHtmlReport() {
+        ChangeFormat date = new DateFormat();
         String lS = System.lineSeparator();
         MemStore store = new MemStore();
-        ChangeFormat change = new DateFormat();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         Employee worker1 = new Employee("Alex", now, now, 300);
@@ -52,7 +52,7 @@ public class ReportEngineTest {
         store.add(worker);
         store.add(worker1);
         store.add(worker2);
-        DeveloperReport report = new DeveloperReport(store);
+        DeveloperReport report = new DeveloperReport(store,date);
         StringBuilder expect = new StringBuilder();
         expect.append("<!DOCTYPE html>").append(lS)
                 .append("<html>").append(lS)
@@ -71,8 +71,8 @@ public class ReportEngineTest {
         for(Employee employee : store.findBy(em -> true)) {
             expect.append("<tr>").append(lS)
                     .append(String.format("<td>%s</td>", employee.getName()))
-                    .append(String.format("<td>%s</td>", change.date(employee.getHired())))
-                    .append(String.format("<td>%s</td>", change.date(employee.getFired())))
+                    .append(String.format("<td>%s</td>",date.date(employee.getHired())))
+                    .append(String.format("<td>%s</td>", date.date(employee.getFired())))
                     .append(String.format("<td>%s</td>", employee.getSalary()))
                     .append("</tr>").append(lS);
         }
@@ -88,11 +88,12 @@ public class ReportEngineTest {
 
     @Test
     public void whenSalaryConvertToDollar() {
+        Converter convert = new ConvertToDollar();
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 76);
         store.add(worker);
-        AccountingDepartmentReport engine = new AccountingDepartmentReport(store);
+        AccountingDepartmentReport engine = new AccountingDepartmentReport(store,convert);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())

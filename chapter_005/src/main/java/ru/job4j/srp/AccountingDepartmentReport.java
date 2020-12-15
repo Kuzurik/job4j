@@ -14,13 +14,14 @@ public class AccountingDepartmentReport implements Report{
      * Stores the object.
      */
     private final Store store;
-
+    private final Converter convert;
     /**
      * Constructor takes a Store object.
      * @param store
      */
-    public AccountingDepartmentReport(Store store) {
+    public AccountingDepartmentReport(Store store, Converter convert) {
         this.store = store;
+        this.convert = convert;
     }
 
     /**
@@ -30,14 +31,13 @@ public class AccountingDepartmentReport implements Report{
      */
     @Override
     public String generate(Predicate<Employee> filter) {
-        Converter converter = new ConvertToDollar();
         StringBuilder text = new StringBuilder();
         text.append("Name; Hired; Fired; Salary;").append(System.lineSeparator());
         for (Employee employee : store.findBy(filter)) {
             text.append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(converter.convert(employee.getSalary())).append(";")
+                    .append(convert.convert(employee.getSalary())).append(";")
                     .append(System.lineSeparator());
         }
         return text.toString();

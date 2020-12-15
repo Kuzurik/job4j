@@ -14,13 +14,15 @@ public class DeveloperReport implements Report {
      * Stores the object.
      */
     private final Store store;
+    private final ChangeFormat date;
 
     /**
      * Constructor takes a Store object.
      * @param store
      */
-    public DeveloperReport(Store store) {
+    public DeveloperReport(Store store, ChangeFormat date) {
         this.store = store;
+        this.date = date;
     }
 
     /**
@@ -31,7 +33,6 @@ public class DeveloperReport implements Report {
     @Override
     public String generate(Predicate<Employee> filter) {
         String lS = System.lineSeparator();
-        ChangeFormat change = new DateFormat();
         StringBuilder text = new StringBuilder();
         text.append("<!DOCTYPE html>").append(lS)
                 .append("<html>").append(lS)
@@ -50,8 +51,8 @@ public class DeveloperReport implements Report {
         for(Employee employee : store.findBy(filter)) {
             text.append("<tr>").append(lS)
                     .append(String.format("<td>%s</td>", employee.getName()))
-                    .append(String.format("<td>%s</td>", change.date(employee.getHired())))
-                    .append(String.format("<td>%s</td>", change.date(employee.getFired())))
+                    .append(String.format("<td>%s</td>", date.date(employee.getHired())))
+                    .append(String.format("<td>%s</td>", date.date(employee.getFired())))
                     .append(String.format("<td>%s</td>", employee.getSalary()))
                     .append("</tr>").append(lS);
         }
