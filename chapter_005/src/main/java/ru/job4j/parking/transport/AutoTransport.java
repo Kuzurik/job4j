@@ -7,7 +7,7 @@ package ru.job4j.parking.transport;
  */
 
 
-public class AutoTransport {
+public abstract class AutoTransport {
     /**
      * transport name
      */
@@ -26,5 +26,13 @@ public class AutoTransport {
     public AutoTransport(String name, int size) {
         this.name = name;
         this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public String getName() {
+        return name;
     }
 }
