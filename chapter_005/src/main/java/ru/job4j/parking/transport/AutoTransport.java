@@ -35,4 +35,12 @@ public abstract class AutoTransport {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "AutoTransport{" +
+                "name='" + name + '\'' +
+                ", size=" + size +
+                '}';
+    }
 }
