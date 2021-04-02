@@ -22,5 +22,11 @@ public class ControlQuality {
         }
     }
 
-
+    public void resort() {
+        List<Food> foods = new ArrayList<>();
+        for (Storage value : storages) {
+            foods.addAll(value.clear());
+            foods.forEach(this::distribute);
+        }
+    }
 }
