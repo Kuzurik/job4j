@@ -8,16 +8,16 @@ public class Menu implements Add, FindBy, ShowMenu {
 
     private final Node root;
 
-    public Menu(Item root) {
-        this.root = new Node(root);
+    public Menu(Node root) {
+        this.root = root;
     }
 
     @Override
-    public boolean add(Item parent, Item child) {
+    public boolean add(Item parent, Item child, UserAction action) {
         boolean rsl = false;
         Node node = findBy(parent.getName());
         if (node != null) {
-            node.getChildren().add(new Node(child));
+            node.getChildren().add(new Node(child, action));
             rsl = true;
         }
         return rsl;

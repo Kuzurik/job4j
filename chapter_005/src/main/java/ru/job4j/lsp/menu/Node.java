@@ -6,9 +6,11 @@ import java.util.List;
 public class Node {
     private final Item item;
     private List<Node> children = new ArrayList<Node>();
+    private final UserAction action;
 
-    public Node(Item item) {
+    public Node(Item item, UserAction action) {
         this.item = item;
+        this.action = action;
     }
 
     public Item getItem() {
