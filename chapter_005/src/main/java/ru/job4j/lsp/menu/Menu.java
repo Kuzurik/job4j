@@ -13,11 +13,11 @@ public class Menu implements Add, FindBy, ShowMenu {
     }
 
     @Override
-    public boolean add(Item parent, Item child, UserAction action) {
+    public boolean add(Item parent, Item child) {
         boolean rsl = false;
         Node node = findBy(parent.getName());
         if (node != null) {
-            node.getChildren().add(new Node(child, action));
+            node.getChildren().add(new Node(child));
             rsl = true;
         }
         return rsl;
@@ -60,6 +60,13 @@ public class Menu implements Add, FindBy, ShowMenu {
         return builder.toString();
     }
 
+    public UserAction choose(Item item) throws Exception {
+        Item currentItem = findBy(item.getName()).getItem();
+        if (currentItem == null) {
+            throw new Exception("Item not found!");
+        }
+        return () -> System.out.print("You choose: " + currentItem.getName());
+    }
 
 
 
