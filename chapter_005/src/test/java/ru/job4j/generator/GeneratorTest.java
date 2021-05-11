@@ -1,6 +1,5 @@
 package ru.job4j.generator;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -23,45 +22,27 @@ public class GeneratorTest {
         assertThat(expected, is(result));
     }
 
-    @Test
+    @Test(expected = GeneratorException.class)
     public void henNoEnoughArgsThenException() {
         Generator generator = new SimpleGenerator();
         Map<String, String> args = Map.of("subject", "you");
         String template = "I am a ${name}, Who are ${subject}?";
-        try {
-            String result = generator.produce(template, args);
-            Assert.fail("Expected Exception");
-        } catch (Exception thrown) {
-            System.out.println(thrown.getMessage());
-            assertNotEquals("", thrown.getMessage());
-        }
+        generator.produce(template, args);
     }
 
-    @Test
+    @Test(expected = GeneratorException.class)
     public void whenNotArgsThenException() {
         Generator generator = new SimpleGenerator();
         Map<String, String> args = new HashMap<>();
         String template = "I am a ${name}, Who are ${subject}?";
-        try {
-            String result = generator.produce(template, args);
-            Assert.fail("Expected Exception");
-        } catch (Exception thrown) {
-            System.out.println(thrown.getMessage());
-            assertNotEquals("", thrown.getMessage());
-        }
+        generator.produce(template, args);
     }
 
-    @Test
+    @Test(expected = GeneratorException.class)
     public void whenNotKeyThenException() {
         Generator generator = new SimpleGenerator();
         Map<String, String> args = Map.of("text", "alex", "subject", "you");
         String template = "I am a ${name}, Who are ${subject}?";
-        try {
-            String result = generator.produce(template, args);
-            Assert.fail("Expected Exception");
-        } catch (Exception thrown) {
-            System.out.println(thrown.getMessage());
-            assertNotEquals("", thrown.getMessage());
-        }
+        generator.produce(template, args);
     }
 }
